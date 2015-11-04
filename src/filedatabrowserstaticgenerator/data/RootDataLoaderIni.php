@@ -41,7 +41,7 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 			foreach(array_keys($data['data']) as $k) {
 				if (!in_array($k, array('title','slug','description'))) {
 
-					$fieldConfig = $site->getConfig()->fields[$k];
+					$fieldConfig = isset($site->getConfig()->fields[$k]) ? $site->getConfig()->fields[$k] : null;
 
 					if ($fieldConfig && $fieldConfig->isList) {
 
@@ -59,7 +59,7 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 				}
 			}
 		}
-		
+
 		foreach(scandir($site->getDir() . DIRECTORY_SEPARATOR. "data".DIRECTORY_SEPARATOR.$filename) as $fileInFolderName) {
 			if (substr($fileInFolderName,0,1) != ".") {
 				$r->addFile(

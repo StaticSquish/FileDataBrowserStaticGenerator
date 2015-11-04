@@ -32,13 +32,52 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(0, count($site->getDataErrors()));
 
 		$rootDataObjects = $site->getRootDataObjects();
-		$this->assertEquals(1, count($rootDataObjects));
+		$this->assertEquals(2, count($rootDataObjects));
 
+
+		// FIRST OBJECT
 		$rootDataObject = $rootDataObjects[0];
 
 		$this->assertEquals('Test 1', $rootDataObject->getTitle());
 		$this->assertEquals('testone', $rootDataObject->getSlug());
 
+		$fields = $rootDataObject->getFields();
+		$this->assertNotNull($fields['colours']);
+		$this->assertEquals('filedatabrowserstaticgenerator\models\FieldListValue', get_class( $fields['colours']));
+		$fieldScalars = $fields['colours']->getValues();
+		$this->assertEquals(2, count($fieldScalars));
+
+		$fieldScalar = $fieldScalars[0];
+		$this->assertEquals('filedatabrowserstaticgenerator\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('red', $fieldScalar->getValue());
+
+		$fieldScalar = $fieldScalars[1];
+		$this->assertEquals('filedatabrowserstaticgenerator\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('orange', $fieldScalar->getValue());
+
+		// SECOND OBJECT
+		$rootDataObject = $rootDataObjects[1];
+
+		$this->assertEquals('Test 2', $rootDataObject->getTitle());
+		$this->assertEquals('testtwo', $rootDataObject->getSlug());
+
+		$fields = $rootDataObject->getFields();
+		$this->assertNotNull($fields['colours']);
+		$this->assertEquals('filedatabrowserstaticgenerator\models\FieldListValue', get_class( $fields['colours']));
+		$fieldScalars = $fields['colours']->getValues();
+		$this->assertEquals(3, count($fieldScalars));
+
+		$fieldScalar = $fieldScalars[0];
+		$this->assertEquals('filedatabrowserstaticgenerator\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('red', $fieldScalar->getValue());
+
+		$fieldScalar = $fieldScalars[1];
+		$this->assertEquals('filedatabrowserstaticgenerator\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('green', $fieldScalar->getValue());
+
+		$fieldScalar = $fieldScalars[2];
+		$this->assertEquals('filedatabrowserstaticgenerator\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('blue', $fieldScalar->getValue());
 	}
 
 
