@@ -11,6 +11,7 @@
     {% for rootDataObject in allRootDataObjects %}
       <li>
         <a href="data/{{ rootDataObject.slug }}">{{ rootDataObject.title }}</a>
+				<p>{{ rootDataObject.description | nl2br }}</p>
       </li>
     {% endfor %}
   </ul>
