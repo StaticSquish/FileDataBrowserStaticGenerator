@@ -6,10 +6,13 @@ namespace filedatabrowserstaticgenerator\models;
 /**
  *  @license 3-clause BSD
  */
-class FieldValue {
+class FieldValue extends BaseField  {
 
   protected $value;
 
+  public function __construct($value) {
+    $this->value = $value;
+  }
 
   /**
    * Get the value of Value

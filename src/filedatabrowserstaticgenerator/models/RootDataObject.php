@@ -16,6 +16,8 @@ class RootDataObject {
 
   protected $files = array();
 
+  protected $fields = array();
+
   /**
    * Get the value of Slug
    *
@@ -101,6 +103,20 @@ class RootDataObject {
     public function getFiles()
     {
         return $this->files;
+    }
+
+    public function addField($key, BaseField $field) {
+      $this->fields[$key] = $field;
+    }
+
+    /**
+     * Get the value of Fields
+     *
+     * @return mixed
+     */
+    public function getFields()
+    {
+        return $this->fields;
     }
 
 }

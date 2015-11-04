@@ -9,6 +9,9 @@
 
 	<p>{{ rootDataObject.description | nl2br }}</p>
 
+	{% for key,field in rootDataObject.fields %}
+			<p>{{ key}}: {{ field.value }}</p>
+	{% endfor %}
 
 	{% if rootDataObject.files %}
 		<ul>

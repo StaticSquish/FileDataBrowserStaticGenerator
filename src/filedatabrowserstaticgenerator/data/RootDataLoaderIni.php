@@ -5,6 +5,7 @@ namespace filedatabrowserstaticgenerator\data;
 use filedatabrowserstaticgenerator\Site;
 use filedatabrowserstaticgenerator\models\RootDataObject;
 use filedatabrowserstaticgenerator\models\File;
+use filedatabrowserstaticgenerator\models\FieldValue;
 
 /**
  *  @license 3-clause BSD
@@ -33,6 +34,15 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 		}
 		if (isset($data['data']['description']) && $data['data']['description']) {
 			$r->setDescription($data['data']['description']);
+		}
+
+		if (isset($data['data'])) {
+			foreach(array_keys($data['data']) as $k) {
+				if (!in_array($k, array('title','slug','description'))) {
+					$field = new FieldValue($data['data'][$k]);
+					$r->addField($k, $field);
+				}
+			}
 		}
 
 		foreach(scandir($site->getDir() . DIRECTORY_SEPARATOR. "data".DIRECTORY_SEPARATOR.$filename) as $fileInFolderName) {
