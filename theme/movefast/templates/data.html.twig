@@ -1,0 +1,17 @@
+{# @license 3-clause BSD #}
+
+
+{% extends 'page.html.twig' %}
+
+{% block content %}
+
+	<p>Data</p>
+
+  <ul>
+    {% for rootDataObject in allRootDataObjects %}
+      <li>
+        {{ rootDataObject.title }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

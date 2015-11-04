@@ -88,6 +88,7 @@ class Site {
 		// General Data
 		$data = array(
 			'config'=>$this->config,
+			'allRootDataObjects'=>$this->rootDataObjects,
 		);
 
 		// Index
@@ -96,6 +97,14 @@ class Site {
 			$twig->render('index.html.twig', array_merge($data, array(
 			)))
 		);
+
+		// Data
+		file_put_contents(
+			$outDir.DIRECTORY_SEPARATOR.'data.html',
+			$twig->render('data.html.twig', array_merge($data, array(
+			)))
+		);
+
 
 	}
 
