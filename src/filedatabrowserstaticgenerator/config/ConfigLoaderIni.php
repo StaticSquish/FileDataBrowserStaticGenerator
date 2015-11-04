@@ -20,7 +20,7 @@ class ConfigLoaderIni extends BaseConfigLoader {
 	{
 
 		$file = $site->getDir().DIRECTORY_SEPARATOR."config.ini";
-		$data = parse_ini_file($file);
+		$data = parse_ini_file($file,true);
 
 		if (isset($data['theme']) && $data['theme']) {
 			$config->theme = $data['theme']; // TODO check valid
@@ -29,6 +29,19 @@ class ConfigLoaderIni extends BaseConfigLoader {
 			$config->title = $data['title'];
 		}
 
+		foreach ($data as $key=>$fieldOptions) {
+			if (substr($key, 0, 6) == 'field.') {
+				$fieldName = substr($key, 6);
+
+				$config->fields[$fieldName] = new FieldConfig();
+
+				if (isset($fieldOptions['is_list'])) {
+					$config->fields[$fieldName]->isList = (boolean)$fieldOptions['is_list'];
+				}
+
+
+			}
+		}
 
 
 	}

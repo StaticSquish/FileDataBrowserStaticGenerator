@@ -6,13 +6,9 @@ namespace filedatabrowserstaticgenerator\models;
 /**
  *  @license 3-clause BSD
  */
-class FieldValue extends BaseField {
+class FieldListValue extends BaseField {
 
   protected $values = array();
-
-    public function __construct($values = array()) {
-      $this->values = $values;
-    }
 
   /**
    * Get the value of Values
@@ -22,6 +18,10 @@ class FieldValue extends BaseField {
   public function getValues()
   {
       return $this->values;
+  }
+
+  public function addValue(FieldValue $fieldValue) {
+    $this->values[] = $fieldValue;
   }
 
 }

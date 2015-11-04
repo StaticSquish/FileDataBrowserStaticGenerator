@@ -12,4 +12,6 @@ class Config {
 
 	public $title = 'Data Browser';
 
+	public $fields = array();
+
 }

@@ -29,4 +29,19 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
 
 	}
 
+	function testFields() {
+		global $app;
+
+		$site = new \filedatabrowserstaticgenerator\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteFields');
+
+		$this->assertNotNull($site->getConfig()->fields['test1']);
+		$field = $site->getConfig()->fields['test1'];
+		$this->assertEquals(true, $field->isList);
+
+		$this->assertNotNull($site->getConfig()->fields['test2']);
+		$field = $site->getConfig()->fields['test2'];
+		$this->assertEquals(false, $field->isList);
+
+	}
+
 }

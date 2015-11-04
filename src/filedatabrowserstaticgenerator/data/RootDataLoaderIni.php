@@ -6,6 +6,7 @@ use filedatabrowserstaticgenerator\Site;
 use filedatabrowserstaticgenerator\models\RootDataObject;
 use filedatabrowserstaticgenerator\models\File;
 use filedatabrowserstaticgenerator\models\FieldValue;
+use filedatabrowserstaticgenerator\models\FieldListValue;
 
 /**
  *  @license 3-clause BSD
@@ -39,12 +40,26 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 		if (isset($data['data'])) {
 			foreach(array_keys($data['data']) as $k) {
 				if (!in_array($k, array('title','slug','description'))) {
-					$field = new FieldValue($data['data'][$k]);
+
+					$fieldConfig = $site->getConfig()->fields[$k];
+
+					if ($fieldConfig && $fieldConfig->isList) {
+
+							$field = new FieldListValue;
+							foreach(explode(',', $data['data'][$k]) as $valueBit) {
+								$field->addValue(new FieldValue(trim($valueBit)));
+							}
+
+					} else {
+						// no config - just treat as string
+						$field = new FieldValue($data['data'][$k]);
+					}
+
 					$r->addField($k, $field);
 				}
 			}
 		}
-
+		
 		foreach(scandir($site->getDir() . DIRECTORY_SEPARATOR. "data".DIRECTORY_SEPARATOR.$filename) as $fileInFolderName) {
 			if (substr($fileInFolderName,0,1) != ".") {
 				$r->addFile(

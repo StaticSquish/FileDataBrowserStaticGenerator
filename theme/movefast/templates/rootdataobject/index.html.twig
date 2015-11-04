@@ -10,10 +10,20 @@
 	<p>{{ rootDataObject.description | nl2br }}</p>
 
 	{% for key,field in rootDataObject.fields %}
-			<p>{{ key}}: {{ field.value }}</p>
+			{% if config.fields[key] and config.fields[key].isList %}
+				<p>{{ key}}</p>
+				<ul>
+					{% for valueScalar in field.values %}
+						<li>{{ valueScalar.value }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p>{{ key}}: {{ field.value }}</p>
+			{% endif %}
 	{% endfor %}
 
 	{% if rootDataObject.files %}
+		<p>Files</p>
 		<ul>
 			{% for file in rootDataObject.files %}
 				<li><a href="files/{{ file.name}}">{{ file.name }}</a></li>
