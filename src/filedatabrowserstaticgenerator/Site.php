@@ -105,6 +105,20 @@ class Site {
 			)))
 		);
 
+		// Root Objects
+		mkdir($outDir.DIRECTORY_SEPARATOR.'data');
+		foreach($this->rootDataObjects as $rootDataObject) {
+			$dataDir = $outDir.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$rootDataObject->getSlug();
+			mkdir($dataDir);
+			// index
+			file_put_contents(
+				$dataDir.DIRECTORY_SEPARATOR.'index.html',
+				$twig->render('rootdataobject/index.html.twig', array_merge($data, array(
+					'rootDataObject'=>$rootDataObject,
+				)))
+			);
+		}
+
 
 	}
 

@@ -10,7 +10,7 @@
   <ul>
     {% for rootDataObject in allRootDataObjects %}
       <li>
-        {{ rootDataObject.title }}
+        <a href="data/{{ rootDataObject.slug }}">{{ rootDataObject.title }}</a>
       </li>
     {% endfor %}
   </ul>
