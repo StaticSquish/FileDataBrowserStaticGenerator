@@ -74,6 +74,33 @@ class Site {
 		$this->rootDataObjects[] = $rootDataObject;
 	}
 
+
+	function write($outDir) {
+
+		if (!$this->isLoaded) {
+			$this->load();
+		}
+
+		$twigHelper = new TwigHelper($this);
+		$twig = $twigHelper->getTwig();
+
+
+		// General Data
+		$data = array(
+			'config'=>$this->config,
+		);
+
+		// Index
+		file_put_contents(
+			$outDir.DIRECTORY_SEPARATOR.'index.html',
+			$twig->render('index.html.twig', array_merge($data, array(
+			)))
+		);
+
+	}
+
+
+
 	/**
 	 * @return String
 	 */
