@@ -123,6 +123,20 @@ class Site {
 			}
 		}
 
+		// Field Objects
+		mkdir($outDir.DIRECTORY_SEPARATOR.'field');
+		foreach($this->config->fields as $key => $fieldConfig) {
+			$dataDir = $outDir.DIRECTORY_SEPARATOR.'field'.DIRECTORY_SEPARATOR.$key;
+			mkdir($dataDir);
+			// index
+			file_put_contents(
+				$dataDir.DIRECTORY_SEPARATOR.'index.html',
+				$twig->render('field/index.html.twig', array_merge($data, array(
+					'fieldKey'=>$key,
+					'fieldConfig'=>$fieldConfig,
+				)))
+			);
+		}
 
 	}
 

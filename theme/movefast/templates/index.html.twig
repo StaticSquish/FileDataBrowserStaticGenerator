@@ -9,7 +9,9 @@
 
 	<ul>
 		<li><a href="data.html">All Data</a></li>
-
+		{% for fieldKey, fieldConfig in config.fields %}
+		<li><a href="field/{{ fieldKey}}/">{{ fieldKey}}</a></li>
+		{% endfor %}
 	</ul>
 
 {% endblock %}
