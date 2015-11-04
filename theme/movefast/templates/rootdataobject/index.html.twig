@@ -9,4 +9,14 @@
 
 	<p>{{ rootDataObject.description | nl2br }}</p>
 
+
+	{% if rootDataObject.files %}
+		<ul>
+			{% for file in rootDataObject.files %}
+				<li><a href="files/{{ file.name}}">{{ file.name }}</a></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+
 {% endblock %}

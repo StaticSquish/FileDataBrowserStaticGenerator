@@ -14,6 +14,8 @@ class RootDataObject {
 
   protected $description;
 
+  protected $files = array();
+
   /**
    * Get the value of Slug
    *
@@ -85,5 +87,20 @@ class RootDataObject {
 
       return $this;
   }
+
+
+  public function addFile(File $file) {
+    $this->files[] = $file;
+  }
+
+    /**
+     * Get the value of Files
+     *
+     * @return mixed
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
 
 }

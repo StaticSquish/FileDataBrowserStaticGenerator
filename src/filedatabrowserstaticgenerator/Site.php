@@ -65,7 +65,6 @@ class Site {
 			}
 		}
 
-
 		$this->isLoaded = true;
 
 	}
@@ -117,6 +116,11 @@ class Site {
 					'rootDataObject'=>$rootDataObject,
 				)))
 			);
+			// files
+			mkdir($dataDir.DIRECTORY_SEPARATOR.'files');
+			foreach($rootDataObject->getFiles() as $file) {
+				copy($file->getDir().DIRECTORY_SEPARATOR.$file->getName(), $dataDir.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$file->getName() );
+			}
 		}
 
 
