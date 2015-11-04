@@ -1,5 +1,9 @@
 <?php
 
+
+use filedatabrowserstaticgenerator\filters\RootDataObjectFilter;
+use filedatabrowserstaticgenerator\aggregation\DistinctValuesAggregation;
+
 /**
  *  @license 3-clause BSD
  */
@@ -78,6 +82,17 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$fieldScalar = $fieldScalars[2];
 		$this->assertEquals('filedatabrowserstaticgenerator\models\FieldValue', get_class($fieldScalar));
 		$this->assertEquals('blue', $fieldScalar->getValue());
+
+		// Site Data
+		$aggregation = new DistinctValuesAggregation(new RootDataObjectFilter($site),'colours');
+
+		$values = $aggregation->getValues();
+		$this->assertEquals(4, count($values));
+
+		$this->assertEquals('red', $values[0]);
+		$this->assertEquals('orange', $values[1]);
+		$this->assertEquals('green', $values[2]);
+		$this->assertEquals('blue', $values[3]);
 	}
 
 

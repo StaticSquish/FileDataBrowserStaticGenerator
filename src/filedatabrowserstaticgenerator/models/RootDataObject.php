@@ -119,4 +119,13 @@ class RootDataObject {
         return $this->fields;
     }
 
+    /**
+     *
+     * @return mixed
+     */
+    public function getField($name)
+    {
+        return isset($this->fields[$name]) ? $this->fields[$name] : null;
+    }
+
 }
