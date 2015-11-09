@@ -7,7 +7,8 @@ use filedatabrowserstaticgenerator\config\Config;
 use filedatabrowserstaticgenerator\config\ConfigLoaderIni;
 use filedatabrowserstaticgenerator\data\RootDataLoaderIni;
 use filedatabrowserstaticgenerator\models\RootDataObject;
-
+use filedatabrowserstaticgenerator\aggregation\DistinctValuesAggregation;
+use filedatabrowserstaticgenerator\filters\RootDataObjectFilter;
 /**
  *  @license 3-clause BSD
  */
@@ -128,12 +129,16 @@ class Site {
 		foreach($this->config->fields as $key => $fieldConfig) {
 			$dataDir = $outDir.DIRECTORY_SEPARATOR.'field'.DIRECTORY_SEPARATOR.$key;
 			mkdir($dataDir);
+
+			$aggregation = new DistinctValuesAggregation(new RootDataObjectFilter($this), $key);
+
 			// index
 			file_put_contents(
 				$dataDir.DIRECTORY_SEPARATOR.'index.html',
 				$twig->render('field/index.html.twig', array_merge($data, array(
 					'fieldKey'=>$key,
 					'fieldConfig'=>$fieldConfig,
+					'values' => $aggregation->getValues(),
 				)))
 			);
 		}
