@@ -132,15 +132,40 @@ class Site {
 
 			$aggregation = new DistinctValuesAggregation(new RootDataObjectFilter($this), $key);
 
+
+
 			// index
+			$values = array();
+			foreach($aggregation->getValues() as $value) {
+				$values[md5($value)] = $value;
+			}
 			file_put_contents(
 				$dataDir.DIRECTORY_SEPARATOR.'index.html',
 				$twig->render('field/index.html.twig', array_merge($data, array(
 					'fieldKey'=>$key,
 					'fieldConfig'=>$fieldConfig,
-					'values' => $aggregation->getValues(),
+					'values' => $values,
 				)))
 			);
+
+			// values
+			$dataDir = $outDir.DIRECTORY_SEPARATOR.'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR;
+			mkdir($dataDir);
+			foreach($aggregation->getValues() as $fieldValue) {
+				$fieldValueKey=md5($fieldValue);
+				$dataDir = $outDir.DIRECTORY_SEPARATOR.'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR.$fieldValueKey;
+				mkdir($dataDir);
+
+				file_put_contents(
+					$dataDir.DIRECTORY_SEPARATOR.'index.html',
+					$twig->render('field/value/index.html.twig', array_merge($data, array(
+						'fieldKey'=>$key,
+						'fieldConfig'=>$fieldConfig,
+						'fieldValue' => $fieldValue,
+					)))
+				);
+
+			}
 		}
 
 	}

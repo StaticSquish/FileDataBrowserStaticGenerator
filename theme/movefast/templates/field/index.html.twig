@@ -8,8 +8,8 @@
 	<p>{{ fieldKey }}</p>
 
 	<ul>
-		{% for value in values %}
-			<li>{{ value }}</li>
+		{% for key, value in values %}
+			<li><a href="value/{{ key }}/">{{ value }}</a></li>
 		{% endfor %}
 	</ul>
 
