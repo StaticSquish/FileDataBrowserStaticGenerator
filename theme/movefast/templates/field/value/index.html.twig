@@ -7,4 +7,14 @@
 
 	<p>{{ fieldKey }}: {{ fieldValue }}</p>
 
+
+  <ul>
+    {% for rootDataObject in rootDataObjects %}
+      <li>
+        <a href="../../../../data/{{ rootDataObject.slug }}">{{ rootDataObject.title }}</a>
+				<p>{{ rootDataObject.description | nl2br }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
 {% endblock %}

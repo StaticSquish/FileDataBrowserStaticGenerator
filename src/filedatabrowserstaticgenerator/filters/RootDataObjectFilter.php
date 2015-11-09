@@ -18,9 +18,29 @@ class RootDataObjectFilter {
   }
 
 
+  protected $fieldFilters = array();
+
+  public function addFieldFilter(FieldFilter $fieldFilter) {
+    $this->fieldFilters[] = $fieldFilter;
+  }
+
 
   public function getRootDataObjects() {
-    return $this->site->getRootDataObjects();
+    $out = array();
+    foreach($this->site->getRootDataObjects() as $rootObject) {
+        $include = true;
+
+        foreach($this->fieldFilters as $fieldFilter) {
+          if (!$fieldFilter->doesRootObjectPass($rootObject)) {
+            $include = false;
+          }
+        }
+
+        if ($include) {
+          $out[] = $rootObject;
+        }
+    }
+    return $out;
   }
 
 }

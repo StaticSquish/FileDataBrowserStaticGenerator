@@ -9,6 +9,7 @@ use filedatabrowserstaticgenerator\data\RootDataLoaderIni;
 use filedatabrowserstaticgenerator\models\RootDataObject;
 use filedatabrowserstaticgenerator\aggregation\DistinctValuesAggregation;
 use filedatabrowserstaticgenerator\filters\RootDataObjectFilter;
+use filedatabrowserstaticgenerator\filters\FieldFilter;
 /**
  *  @license 3-clause BSD
  */
@@ -156,12 +157,15 @@ class Site {
 				$dataDir = $outDir.DIRECTORY_SEPARATOR.'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR.$fieldValueKey;
 				mkdir($dataDir);
 
+				$filter = new RootDataObjectFilter($this);
+				$filter->addFieldFilter(new FieldFilter($this, $key, $fieldValue));
 				file_put_contents(
 					$dataDir.DIRECTORY_SEPARATOR.'index.html',
 					$twig->render('field/value/index.html.twig', array_merge($data, array(
 						'fieldKey'=>$key,
 						'fieldConfig'=>$fieldConfig,
 						'fieldValue' => $fieldValue,
+						'rootDataObjects' => $filter->getRootDataObjects(),
 					)))
 				);
 
