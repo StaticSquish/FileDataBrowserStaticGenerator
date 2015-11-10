@@ -31,7 +31,10 @@
 		<h2>Files</h2>
 		<ul class="list-group">
 			{% for file in rootDataObject.files %}
-				<li class="list-group-item"><a href="files/{{ file.name}}" class="btn btn-default">{{ file.name }}</a></li>
+				<li class="list-group-item">
+					<a href="files/{{ file.name}}" class="btn btn-default">{{ file.name }}</a>
+					{{ file.sizeHumanReadable }}
+				</li>
 			{% endfor %}
 		</ul>
 	{% endif %}

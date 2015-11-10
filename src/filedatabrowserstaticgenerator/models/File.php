@@ -38,5 +38,23 @@ class File {
   {
       return $this->dir;
   }
- 
+
+  public function getSize() {
+    return filesize($this->dir . DIRECTORY_SEPARATOR. $this->name);
+  }
+
+  public function getSizeHumanReadable() {
+    $bytes = $this->getSize();
+
+    if ($bytes >= 1024 * 1024 * 1024) {
+      return round($bytes / 1024 / 1024 / 1024,2) . 'GB';
+    } elseif ($bytes >= 1024 * 1024) {
+      return round($bytes / 1024 / 1024,2) . 'MB';
+    } elseif($bytes >= 1024) {
+      return round($bytes / 1024,1) . 'KB';
+    } else {
+      return $bytes . ' bytes';
+    }
+  }
+
 }
