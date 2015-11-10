@@ -16,7 +16,7 @@
         <li><a href="{{ config.baseURL }}">Home</a></li>
       	<li><a href="{{ config.baseURL }}data.html">All Data</a></li>
         {% for fieldKey, fieldConfig in config.fields %}
-    		  <li><a href="{{ config.baseURL }}field/{{ fieldKey}}/">{{ fieldKey}}</a></li>
+    		  <li><a href="{{ config.baseURL }}field/{{ fieldKey}}/">{{ fieldConfig.label }}</a></li>
     		{% endfor %}
       </ul>
     </div><!--/.nav-collapse -->

@@ -14,7 +14,7 @@
 	<ul class="list-group">
 		<li class="list-group-item"><a href="data.html" class="btn btn-default">All Data</a></li>
 		{% for fieldKey, fieldConfig in config.fields %}
-			<li class="list-group-item"><a href="field/{{ fieldKey}}/" class="btn btn-default">{{ fieldKey}}</a></li>
+			<li class="list-group-item"><a href="field/{{ fieldKey}}/" class="btn btn-default">{{ fieldConfig.label }}</a></li>
 		{% endfor %}
 	</ul>
 

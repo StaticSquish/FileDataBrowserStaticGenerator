@@ -37,9 +37,13 @@ class ConfigLoaderIni extends BaseConfigLoader {
 				$fieldName = substr($key, 6);
 
 				$config->fields[$fieldName] = new FieldConfig();
+				$config->fields[$fieldName]->label = $fieldName;
 
 				if (isset($fieldOptions['is_list'])) {
 					$config->fields[$fieldName]->isList = (boolean)$fieldOptions['is_list'];
+				}
+				if (isset($fieldOptions['label'])) {
+					$config->fields[$fieldName]->label = $fieldOptions['label'];
 				}
 
 

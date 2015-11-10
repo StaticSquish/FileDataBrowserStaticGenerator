@@ -7,11 +7,11 @@
 
 	<ol class="breadcrumb">
 		<li><a href="{{ config.baseURL }}">Home</a></li>
-		<li><a href="{{ config.baseURL }}field/{{ fieldKey }}">Field: {{ fieldKey }}</a></li>
+		<li><a href="{{ config.baseURL }}field/{{ fieldKey }}">Field: {{ fieldConfig.label }}</a></li>
 		<li class="active">Value: {{ fieldValue|slice(0,50) }}</li>
 	</ol>
 
-	<h1>{{ fieldKey }}: {{ fieldValue }}</h1>
+	<h1>{{ fieldConfig.label }}: {{ fieldValue }}</h1>
 
 	<ul>
     {% for rootDataObject in rootDataObjects %}

@@ -52,10 +52,12 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$this->assertNotNull($site->getConfig()->fields['test1']);
 		$field = $site->getConfig()->fields['test1'];
 		$this->assertEquals(true, $field->isList);
+		$this->assertEquals("test1", $field->label);
 
 		$this->assertNotNull($site->getConfig()->fields['test2']);
 		$field = $site->getConfig()->fields['test2'];
 		$this->assertEquals(false, $field->isList);
+		$this->assertEquals("TESTTWO", $field->label);
 
 	}
 

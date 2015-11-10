@@ -7,10 +7,10 @@
 
 	<ol class="breadcrumb">
 		<li><a href="{{ config.baseURL }}">Home</a></li>
-		<li class="active">Field: {{ fieldKey }}</li>
+		<li class="active">Field: {{ fieldConfig.label }}</li>
 	</ol>
 
-	<h1>{{ fieldKey }}</h1>
+	<h1>{{ fieldConfig.label }}</h1>
 
 	<ul>
 		{% for key, value in values %}

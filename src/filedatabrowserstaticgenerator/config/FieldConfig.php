@@ -9,4 +9,6 @@ class FieldConfig {
 
 	public $isList = false;
 
+	public $label = '';
+
 }
