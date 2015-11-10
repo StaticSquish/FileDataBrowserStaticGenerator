@@ -15,14 +15,12 @@ class TwigHelper {
   /** @var Twig_Environment */
   protected $twig;
 
+  /** @var TemporaryFolder **/
   protected $cacheDir;
 
   function __construct(Site $site)
   {
-    $this->cacheDir = '/tmp/filedatabrowserstaticgenerator'.rand();
-    while(file_exists($this->cacheDir)) {
-      $this->cacheDir = '/tmp/filedatabrowserstaticgenerator'.rand();
-    }
+		$this->cacheDir = new TemporaryFolder();
 
     $templates = array(
       APP_ROOT_DIR.DIRECTORY_SEPARATOR.'theme'.DIRECTORY_SEPARATOR.$site->getConfig()->theme.DIRECTORY_SEPARATOR.'templates',
@@ -33,7 +31,7 @@ class TwigHelper {
     }
     $loader = new Twig_Loader_Filesystem($templates);
     $this->twig = new Twig_Environment($loader, array(
-      'cache' => $this->cacheDir,
+      'cache' => $this->cacheDir->get(),
     ));
   }
 
