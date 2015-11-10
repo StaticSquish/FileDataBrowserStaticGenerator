@@ -6,8 +6,14 @@
 require __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'autoload.php';
 
 
-$opts = getopt('',array('help','build','out:','site:'));
+$opts = getopt('',array('help','build','out:','site:','baseurl:'));
 
+
+function setConfig(\filedatabrowserstaticgenerator\Site $site, $opts) {
+	if (isset($opts['baseurl']) && $opts['baseurl']) {
+		$site->getConfig()->baseURL = $opts['baseurl'];
+	}
+}
 
 if (isset($opts['help'])) {
   print "HELP PAGE\n";
@@ -25,6 +31,7 @@ if (isset($opts['build'])) {
   }
 
   $site = new \filedatabrowserstaticgenerator\Site($app, $opts['site']);
+	setConfig($site, $opts);
 
   if ($site->getDataWarnings()) {
     print "Warnings:\n\n";

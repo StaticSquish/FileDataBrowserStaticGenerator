@@ -14,6 +14,7 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($defaultConfig->title, $site->getConfig()->title);
 		$this->assertEquals($defaultConfig->theme, $site->getConfig()->theme);
+		$this->assertEquals($defaultConfig->baseURL, $site->getConfig()->baseURL);
 
 	}
 
@@ -26,6 +27,20 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals('TEST', $site->getConfig()->title);
 		$this->assertEquals($defaultConfig->theme, $site->getConfig()->theme);
+		$this->assertEquals($defaultConfig->baseURL, $site->getConfig()->baseURL);
+
+	}
+
+	function testBaseURL() {
+		global $app;
+
+		$site = new \filedatabrowserstaticgenerator\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteBaseURL');
+
+		$defaultConfig = new \filedatabrowserstaticgenerator\config\Config();
+
+		$this->assertEquals($defaultConfig->title, $site->getConfig()->title);
+		$this->assertEquals($defaultConfig->theme, $site->getConfig()->theme);
+		$this->assertEquals('/data', $site->getConfig()->baseURL);
 
 	}
 

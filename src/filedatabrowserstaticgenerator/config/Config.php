@@ -14,4 +14,6 @@ class Config {
 
 	public $fields = array();
 
+	public $baseURL = '';
+	
 }

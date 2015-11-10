@@ -173,6 +173,9 @@ class Site {
 			}
 		}
 
+		// theme
+		$outFolder->copyFolder(APP_ROOT_DIR.'theme'.DIRECTORY_SEPARATOR.$this->config->theme.DIRECTORY_SEPARATOR.'files');
+
 	}
 
 

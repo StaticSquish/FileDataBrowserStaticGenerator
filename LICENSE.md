@@ -14,3 +14,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 =======================
 
 Uses code from https://github.com/OpenACalendar/OpenACalendar-StaticWeb-Core - under similar license
+
+=======================
+
+Uses
+
+  *  Bootstrap
+  *  jQuery

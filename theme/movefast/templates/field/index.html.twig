@@ -5,11 +5,19 @@
 
 {% block content %}
 
-	<p>{{ fieldKey }}</p>
+	<ol class="breadcrumb">
+		<li><a href="{{ config.baseURL }}">Home</a></li>
+		<li class="active">Field: {{ fieldKey }}</li>
+	</ol>
+
+	<h1>{{ fieldKey }}</h1>
 
 	<ul>
 		{% for key, value in values %}
-			<li><a href="value/{{ key }}/">{{ value }}</a></li>
+			<li>
+				<a href="value/{{ key }}/">{{ value }}</a>
+				<a href="value/{{ key }}/" class="btn btn-default">View</a>
+			</li>
 		{% endfor %}
 	</ul>
 

@@ -5,12 +5,16 @@
 
 {% block content %}
 
-	<p>Welcome!</p>
+	<ol class="breadcrumb">
+		 <li class="active">Home</li>
+	 </ol>
 
-	<ul>
-		<li><a href="data.html">All Data</a></li>
+	<h1>Welcome!</h1>
+
+	<ul class="list-group">
+		<li class="list-group-item"><a href="data.html" class="btn btn-default">All Data</a></li>
 		{% for fieldKey, fieldConfig in config.fields %}
-		<li><a href="field/{{ fieldKey}}/">{{ fieldKey}}</a></li>
+			<li class="list-group-item"><a href="field/{{ fieldKey}}/" class="btn btn-default">{{ fieldKey}}</a></li>
 		{% endfor %}
 	</ul>
 

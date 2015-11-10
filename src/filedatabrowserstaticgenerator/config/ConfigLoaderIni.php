@@ -28,6 +28,9 @@ class ConfigLoaderIni extends BaseConfigLoader {
 		if (isset($data['title']) && $data['title']) {
 			$config->title = $data['title'];
 		}
+		if (isset($data['base_url']) && $data['base_url']) {
+			$config->baseURL = $data['base_url'];
+		}
 
 		foreach ($data as $key=>$fieldOptions) {
 			if (substr($key, 0, 6) == 'field.') {

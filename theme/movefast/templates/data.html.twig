@@ -5,13 +5,19 @@
 
 {% block content %}
 
-	<p>Data</p>
+	<ol class="breadcrumb">
+		<li><a href="{{ config.baseURL }}">Home</a></li>
+		<li class="active">Data</li>
+	</ol>
+
+	<h1>Data</h1>
 
   <ul>
     {% for rootDataObject in allRootDataObjects %}
       <li>
-        <a href="data/{{ rootDataObject.slug }}">{{ rootDataObject.title }}</a>
+        <h2><a href="data/{{ rootDataObject.slug }}">{{ rootDataObject.title }}</a></h2>
 				<p>{{ rootDataObject.description | nl2br }}</p>
+				<a href="data/{{ rootDataObject.slug }}" class="btn btn-default">View</a>
       </li>
     {% endfor %}
   </ul>

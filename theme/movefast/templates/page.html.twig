@@ -6,27 +6,22 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<title>{{  config.title }}</title>
+
+    <link href="{{ config.baseURL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ config.baseURL }}css/bootstrap-theme.min.css" rel="stylesheet">
 		{% block htmlHeader %}{% endblock %}
 	</head>
-	<body>
-		<div id="pageWrapper">
-			<div id="page">
-				<div id="headerWrapper">
-					<div id="header">
-						{%  include 'header.html.twig' %}
-					</div>
-				</div>
-				<div id="bodyWrapper">
-					<div id="body">
-						{% block content %}{% endblock %}
-					</div>
-				</div>
-				<div id="footerWrapper">
-					<div id="footer">
-						{%  include 'footer.html.twig' %}
-					</div>
-				</div>
-			</div>
+	<body role="document">
+
+		{%  include 'header.html.twig' %}
+
+    <div class="container theme-showcase" role="main">
+			{% block content %}{% endblock %}
 		</div>
+
+		{%  include 'footer.html.twig' %}
+
+		<script src="{{ config.baseURL }}js/jquery.min.js"></script>
+		<script src="{{ config.baseURL }}js/bootstrap.min.js"></script>
 	</body>
 </html>

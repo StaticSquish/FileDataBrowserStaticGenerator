@@ -5,7 +5,12 @@
 
 {% block content %}
 
-	<p>{{ rootDataObject.title }}</p>
+	<ol class="breadcrumb">
+		<li><a href="{{ config.baseURL }}">Home</a></li>
+		<li class="active">Data: {{ rootDataObject.title|slice(0,50) }}</li>
+	</ol>
+
+	<h1>{{ rootDataObject.title }}</h1>
 
 	<p>{{ rootDataObject.description | nl2br }}</p>
 
@@ -23,10 +28,10 @@
 	{% endfor %}
 
 	{% if rootDataObject.files %}
-		<p>Files</p>
-		<ul>
+		<h2>Files</h2>
+		<ul class="list-group">
 			{% for file in rootDataObject.files %}
-				<li><a href="files/{{ file.name}}">{{ file.name }}</a></li>
+				<li class="list-group-item"><a href="files/{{ file.name}}" class="btn btn-default">{{ file.name }}</a></li>
 			{% endfor %}
 		</ul>
 	{% endif %}
