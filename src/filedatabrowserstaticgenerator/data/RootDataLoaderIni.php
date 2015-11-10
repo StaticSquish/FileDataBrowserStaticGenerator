@@ -61,7 +61,7 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 		}
 
 		foreach(scandir($site->getDir() . DIRECTORY_SEPARATOR. "data".DIRECTORY_SEPARATOR.$filename) as $fileInFolderName) {
-			if (substr($fileInFolderName,0,1) != ".") {
+			if (substr($fileInFolderName,0,1) != "." && $fileInFolderName != 'data.ini') {
 				$r->addFile(
 					new File($site->getDir() . DIRECTORY_SEPARATOR. "data".DIRECTORY_SEPARATOR.$filename, $fileInFolderName)
 				);
