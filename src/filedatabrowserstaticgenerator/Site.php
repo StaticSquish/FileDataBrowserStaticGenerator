@@ -6,6 +6,7 @@ use Pimple\Container;
 use filedatabrowserstaticgenerator\config\Config;
 use filedatabrowserstaticgenerator\config\ConfigLoaderIni;
 use filedatabrowserstaticgenerator\data\RootDataLoaderIni;
+use filedatabrowserstaticgenerator\data\RootDataLoaderTxt;
 use filedatabrowserstaticgenerator\models\RootDataObject;
 use filedatabrowserstaticgenerator\aggregation\DistinctValuesAggregation;
 use filedatabrowserstaticgenerator\filters\RootDataObjectFilter;
@@ -50,6 +51,7 @@ class Site {
 
 		$loaders = array(
 			new RootDataLoaderIni(),
+			new RootDataLoaderTxt(),
 		);
 
 		foreach(scandir($this->dir . DIRECTORY_SEPARATOR. "data") as $fileName) {
