@@ -16,16 +16,18 @@
 
 	{% for key,field in rootDataObject.fields %}
 			{% if config.fields[key] and config.fields[key].isList %}
-				<p>{{ config.fields[key].label }}</p>
+				<p><a href="{{ config.baseURL }}field/{{ key }}">{{ config.fields[key].label }}</a></p>
 				<ul>
 					{% for valueScalar in field.values %}
 						<li>{{ valueScalar.value }}</li>
 					{% endfor %}
 				</ul>
 			{% elseif config.fields[key] %}
-				<p>{{ config.fields[key].label }}: {{ field.value }}</p>
+				<p><a href="{{ config.baseURL }}field/{{ key }}">{{ config.fields[key].label }}</a></p>
+				<p>{{ field.value }}</p>
 			{% else %}
-				<p>{{ key }}: {{ field.value }}</p>
+				<p>{{ key }}</p>
+				<p>{{ field.value }}</p>
 			{% endif %}
 	{% endfor %}
 
