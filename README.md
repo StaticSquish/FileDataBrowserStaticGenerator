@@ -25,5 +25,5 @@ composer install
 To build a site, run
 
 ```
-php run/StaticSquish.php --build --site demo1 --out out --baseurl=XXX
+php run/StaticSquish.php --build --site demo1 --out out --baseurl XXX
 ```
