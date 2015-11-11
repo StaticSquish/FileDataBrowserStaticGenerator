@@ -1,8 +1,8 @@
 <?php
 
-namespace filedatabrowserstaticgenerator\aggregation;
+namespace staticsquish\aggregation;
 
-use filedatabrowserstaticgenerator\filters\RootDataObjectFilter;
+use staticsquish\filters\RootDataObjectFilter;
 
 /**
  *  @license 3-clause BSD
@@ -35,9 +35,9 @@ class DistinctValuesAggregation {
       $field = $rootDataObject->getField($this->fieldName);
       if ($field) {
 
-        if (is_a($field, 'filedatabrowserstaticgenerator\models\FieldValue')) {
+        if (is_a($field, 'staticsquish\models\FieldValue')) {
           $this->checkValue($field->getValue());
-        } else if (is_a($field, 'filedatabrowserstaticgenerator\models\FieldListValue')) {
+        } else if (is_a($field, 'staticsquish\models\FieldListValue')) {
           foreach($field->getValues() as $fieldValueScalar) {
             $this->checkValue($fieldValueScalar->getValue());
           }

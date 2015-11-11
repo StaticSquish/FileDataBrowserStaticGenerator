@@ -1,6 +1,6 @@
 <?php
 
-use filedatabrowserstaticgenerator\FileLoaderTxt;
+use staticsquish\FileLoaderTxt;
 
 /**
 *  @license 3-clause BSD

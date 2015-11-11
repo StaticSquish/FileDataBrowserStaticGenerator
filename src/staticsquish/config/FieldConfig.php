@@ -1,6 +1,6 @@
 <?php
 
-namespace filedatabrowserstaticgenerator\config;
+namespace staticsquish\config;
 
 /**
  *  @license 3-clause BSD

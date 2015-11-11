@@ -1,7 +1,7 @@
 <?php
 
 
-namespace filedatabrowserstaticgenerator\models;
+namespace staticsquish\models;
 
 /**
  *  @license 3-clause BSD

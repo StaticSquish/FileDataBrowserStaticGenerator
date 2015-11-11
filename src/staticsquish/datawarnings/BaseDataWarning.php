@@ -1,7 +1,7 @@
 <?php
 
 
-namespace filedatabrowserstaticgenerator\datawarnings;
+namespace staticsquish\datawarnings;
 
 /**
  *  @license 3-clause BSD

@@ -1,13 +1,13 @@
 <?php
 
-namespace filedatabrowserstaticgenerator\data;
+namespace staticsquish\data;
 
-use filedatabrowserstaticgenerator\Site;
-use filedatabrowserstaticgenerator\models\RootDataObject;
-use filedatabrowserstaticgenerator\models\File;
-use filedatabrowserstaticgenerator\models\FieldValue;
-use filedatabrowserstaticgenerator\models\FieldListValue;
-use filedatabrowserstaticgenerator\FileLoaderTxt;
+use staticsquish\Site;
+use staticsquish\models\RootDataObject;
+use staticsquish\models\File;
+use staticsquish\models\FieldValue;
+use staticsquish\models\FieldListValue;
+use staticsquish\FileLoaderTxt;
 
 /**
 *  @license 3-clause BSD

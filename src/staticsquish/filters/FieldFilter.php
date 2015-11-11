@@ -1,12 +1,12 @@
 <?php
 
 
-namespace filedatabrowserstaticgenerator\filters;
+namespace staticsquish\filters;
 
-use filedatabrowserstaticgenerator\Site;
-use filedatabrowserstaticgenerator\models\RootDataObject;
-use filedatabrowserstaticgenerator\models\FieldListValue;
-use filedatabrowserstaticgenerator\models\FieldValue;
+use staticsquish\Site;
+use staticsquish\models\RootDataObject;
+use staticsquish\models\FieldListValue;
+use staticsquish\models\FieldValue;
 
 /**
  *  @license 3-clause BSD
@@ -33,9 +33,9 @@ class FieldFilter {
 
         if (!$field) {
           return false;
-        } else if (is_a($field, 'filedatabrowserstaticgenerator\models\FieldListValue')) {
+        } else if (is_a($field, 'staticsquish\models\FieldListValue')) {
           return $this->doesFieldListValuePass($field);
-        } else if (is_a($field, 'filedatabrowserstaticgenerator\models\FieldValue')) {
+        } else if (is_a($field, 'staticsquish\models\FieldValue')) {
           return $this->doesFieldValuePass($field);
         }
 

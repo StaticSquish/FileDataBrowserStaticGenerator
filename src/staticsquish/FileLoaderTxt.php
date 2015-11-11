@@ -1,6 +1,6 @@
 <?php
 
-namespace filedatabrowserstaticgenerator;
+namespace staticsquish;
 
 
 /**
@@ -31,7 +31,7 @@ class FileLoaderTxt {
     }
 
   }
-  
+
   public function getAsList($key) {
     if (isset($this->data[$key])) {
       $out = array();

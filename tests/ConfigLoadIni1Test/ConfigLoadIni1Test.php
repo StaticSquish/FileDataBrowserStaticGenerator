@@ -8,9 +8,9 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
 	function testEmptyConfig() {
 		global $app;
 
-		$site = new \filedatabrowserstaticgenerator\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteEmpty');
+		$site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteEmpty');
 
-		$defaultConfig = new \filedatabrowserstaticgenerator\config\Config();
+		$defaultConfig = new \staticsquish\config\Config();
 
 		$this->assertEquals($defaultConfig->title, $site->getConfig()->title);
 		$this->assertEquals($defaultConfig->theme, $site->getConfig()->theme);
@@ -21,9 +21,9 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
 	function testTitle() {
 		global $app;
 
-		$site = new \filedatabrowserstaticgenerator\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteTitle');
+		$site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteTitle');
 
-		$defaultConfig = new \filedatabrowserstaticgenerator\config\Config();
+		$defaultConfig = new \staticsquish\config\Config();
 
 		$this->assertEquals('TEST', $site->getConfig()->title);
 		$this->assertEquals($defaultConfig->theme, $site->getConfig()->theme);
@@ -34,9 +34,9 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
 	function testBaseURL() {
 		global $app;
 
-		$site = new \filedatabrowserstaticgenerator\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteBaseURL');
+		$site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteBaseURL');
 
-		$defaultConfig = new \filedatabrowserstaticgenerator\config\Config();
+		$defaultConfig = new \staticsquish\config\Config();
 
 		$this->assertEquals($defaultConfig->title, $site->getConfig()->title);
 		$this->assertEquals($defaultConfig->theme, $site->getConfig()->theme);
@@ -47,7 +47,7 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
 	function testFields() {
 		global $app;
 
-		$site = new \filedatabrowserstaticgenerator\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteFields');
+		$site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteFields');
 
 		$this->assertNotNull($site->getConfig()->fields['test1']);
 		$field = $site->getConfig()->fields['test1'];

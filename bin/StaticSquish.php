@@ -9,7 +9,7 @@ require __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEP
 $opts = getopt('',array('help','build','out:','site:','baseurl:'));
 
 
-function setConfig(\filedatabrowserstaticgenerator\Site $site, $opts) {
+function setConfig(\staticsquish\Site $site, $opts) {
 	if (isset($opts['baseurl']) && $opts['baseurl']) {
 		$site->getConfig()->baseURL = $opts['baseurl'];
 	}
@@ -30,7 +30,7 @@ if (isset($opts['build'])) {
     die();
   }
 
-  $site = new \filedatabrowserstaticgenerator\Site($app, $opts['site']);
+  $site = new \staticsquish\Site($app, $opts['site']);
 	setConfig($site, $opts);
 
   if ($site->getDataWarnings()) {

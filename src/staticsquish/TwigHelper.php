@@ -1,6 +1,6 @@
 <?php
 
-namespace filedatabrowserstaticgenerator;
+namespace staticsquish;
 
 
 use \Twig_Environment;

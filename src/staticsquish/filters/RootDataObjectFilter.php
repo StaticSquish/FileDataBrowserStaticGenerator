@@ -1,9 +1,9 @@
 <?php
 
 
-namespace filedatabrowserstaticgenerator\filters;
+namespace staticsquish\filters;
 
-use filedatabrowserstaticgenerator\Site;
+use staticsquish\Site;
 
 /**
  *  @license 3-clause BSD

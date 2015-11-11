@@ -1,8 +1,8 @@
 <?php
 
-namespace filedatabrowserstaticgenerator\config;
+namespace staticsquish\config;
 
-use filedatabrowserstaticgenerator\Site;
+use staticsquish\Site;
 
 /**
  *  @license 3-clause BSD

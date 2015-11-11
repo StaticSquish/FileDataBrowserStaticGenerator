@@ -1,16 +1,16 @@
 <?php
 
-namespace filedatabrowserstaticgenerator;
+namespace staticsquish;
 
 use Pimple\Container;
-use filedatabrowserstaticgenerator\config\Config;
-use filedatabrowserstaticgenerator\config\ConfigLoaderIni;
-use filedatabrowserstaticgenerator\data\RootDataLoaderIni;
-use filedatabrowserstaticgenerator\data\RootDataLoaderTxt;
-use filedatabrowserstaticgenerator\models\RootDataObject;
-use filedatabrowserstaticgenerator\aggregation\DistinctValuesAggregation;
-use filedatabrowserstaticgenerator\filters\RootDataObjectFilter;
-use filedatabrowserstaticgenerator\filters\FieldFilter;
+use staticsquish\config\Config;
+use staticsquish\config\ConfigLoaderIni;
+use staticsquish\data\RootDataLoaderIni;
+use staticsquish\data\RootDataLoaderTxt;
+use staticsquish\models\RootDataObject;
+use staticsquish\aggregation\DistinctValuesAggregation;
+use staticsquish\filters\RootDataObjectFilter;
+use staticsquish\filters\FieldFilter;
 /**
  *  @license 3-clause BSD
  */
@@ -60,7 +60,7 @@ class Site {
 				foreach($loaders as $loader) {
 					if ($loader->isLoadableDataInSite($this, $fileName)) {
 						$out = $loader->loadRootDataInSite($this, $fileName);
-						if (is_a($out, 'filedatabrowserstaticgenerator\models\RootDataObject')) {
+						if (is_a($out, 'staticsquish\models\RootDataObject')) {
 							$this->addRootDataObject($out);
 						}
 					}
