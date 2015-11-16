@@ -6,7 +6,7 @@
 {% block content %}
 
 	<ol class="breadcrumb">
-		<li><a href="{{ config.baseURL }}">Home</a></li>
+		<li><a href="{{ '/' | internalLinkToDir }}">Home</a></li>
 		<li class="active">Field: {{ fieldConfig.label }}</li>
 	</ol>
 
@@ -15,8 +15,8 @@
 	<ul>
 		{% for key, value in values %}
 			<li>
-				<a href="value/{{ key }}/">{{ value }}</a>
-				<a href="value/{{ key }}/" class="btn btn-default">View</a>
+				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ key) | internalLinkToDir }}">{{ value }}</a>
+				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ key) | internalLinkToDir }}" class="btn btn-default">View</a>
 			</li>
 		{% endfor %}
 	</ul>

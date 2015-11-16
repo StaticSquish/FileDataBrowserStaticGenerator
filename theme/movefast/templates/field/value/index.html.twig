@@ -6,8 +6,8 @@
 {% block content %}
 
 	<ol class="breadcrumb">
-		<li><a href="{{ config.baseURL }}">Home</a></li>
-		<li><a href="{{ config.baseURL }}field/{{ fieldKey }}">Field: {{ fieldConfig.label }}</a></li>
+		<li><a href="{{ '/' | internalLinkToDir }}">Home</a></li>
+		<li><a href="{{ ('/field/' ~ fieldKey ) | internalLinkToDir }}">Field: {{ fieldConfig.label }}</a></li>
 		<li class="active">Value: {{ fieldValue|slice(0,50) }}</li>
 	</ol>
 
@@ -16,9 +16,9 @@
 	<ul>
     {% for rootDataObject in rootDataObjects %}
       <li>
-        <h2><a href="{{ config.baseURL }}data/{{ rootDataObject.slug }}">{{ rootDataObject.title }}</a></h2>
+        <h2><a href="{{ ('/data/' ~  rootDataObject.slug) | internalLinkToDir }}">{{ rootDataObject.title }}</a></h2>
 				<p>{{ rootDataObject.description | nl2br }}</p>
-				<a href="{{ config.baseURL }}data/{{ rootDataObject.slug }}" class="btn btn-default">View</a>
+				<a href="{{ ('/data/' ~  rootDataObject.slug) | internalLinkToDir }}" class="btn btn-default">View</a>
       </li>
     {% endfor %}
   </ul>

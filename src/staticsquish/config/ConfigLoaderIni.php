@@ -31,6 +31,9 @@ class ConfigLoaderIni extends BaseConfigLoader {
 		if (isset($data['base_url']) && $data['base_url']) {
 			$config->baseURL = $data['base_url'];
 		}
+		if (isset($data['internal_link_to_dir_append_directory_index'])) {
+			$config->internalLinkToDirAppendDirectoryIndex = (boolean)$data['internal_link_to_dir_append_directory_index'];
+		}
 
 		foreach ($data as $key=>$fieldOptions) {
 			if (substr($key, 0, 6) == 'field.') {

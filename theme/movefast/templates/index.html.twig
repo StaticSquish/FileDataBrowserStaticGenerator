@@ -12,9 +12,9 @@
 	<h1>Welcome!</h1>
 
 	<ul class="list-group">
-		<li class="list-group-item"><a href="data.html" class="btn btn-default">All Data</a></li>
+		<li class="list-group-item"><a href="{{ '/data.html' | internalLink }}" class="btn btn-default">All Data</a></li>
 		{% for fieldKey, fieldConfig in config.fields %}
-			<li class="list-group-item"><a href="field/{{ fieldKey}}/" class="btn btn-default">{{ fieldConfig.label }}</a></li>
+			<li class="list-group-item"><a href="{{ ('/field/' ~ fieldKey ) | internalLinkToDir }}" class="btn btn-default">{{ fieldConfig.label }}</a></li>
 		{% endfor %}
 	</ul>
 

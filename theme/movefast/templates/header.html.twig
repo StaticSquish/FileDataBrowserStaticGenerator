@@ -9,14 +9,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ config.baseURL }}">{{ config.title }}</a>
+      <a class="navbar-brand" href="{{ '/' | internalLinkToDir }}">{{ config.title }}</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="{{ config.baseURL }}">Home</a></li>
-      	<li><a href="{{ config.baseURL }}data.html">All Data</a></li>
+        <li><a href="{{ '/' | internalLinkToDir }}">Home</a></li>
+      	<li><a href="{{ '/data.html' | internalLink }} ">All Data</a></li>
         {% for fieldKey, fieldConfig in config.fields %}
-    		  <li><a href="{{ config.baseURL }}field/{{ fieldKey}}/">{{ fieldConfig.label }}</a></li>
+    		  <li><a href="{{ ('/field/' ~ fieldKey ) | internalLinkToDir }}">{{ fieldConfig.label }}</a></li>
     		{% endfor %}
       </ul>
     </div><!--/.nav-collapse -->

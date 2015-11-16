@@ -6,7 +6,7 @@
 {% block content %}
 
 	<ol class="breadcrumb">
-		<li><a href="{{ config.baseURL }}">Home</a></li>
+		<li><a href="{{ '/' | internalLinkToDir }}">Home</a></li>
 		<li class="active">Data: {{ rootDataObject.title|slice(0,50) }}</li>
 	</ol>
 
@@ -16,14 +16,14 @@
 
 	{% for key,field in rootDataObject.fields %}
 			{% if config.fields[key] and config.fields[key].isList %}
-				<p><a href="{{ config.baseURL }}field/{{ key }}">{{ config.fields[key].label }}</a></p>
+				<p><a href="{{ ('/field/' ~ key ) | internalLinkToDir }}">{{ config.fields[key].label }}</a></p>
 				<ul>
 					{% for valueScalar in field.values %}
 						<li>{{ valueScalar.value }}</li>
 					{% endfor %}
 				</ul>
 			{% elseif config.fields[key] %}
-				<p><a href="{{ config.baseURL }}field/{{ key }}">{{ config.fields[key].label }}</a></p>
+				<p><a href="{{ ('/field/' ~ key ) | internalLinkToDir }}">{{ config.fields[key].label }}</a></p>
 				<p>{{ field.value }}</p>
 			{% else %}
 				<p>{{ key }}</p>

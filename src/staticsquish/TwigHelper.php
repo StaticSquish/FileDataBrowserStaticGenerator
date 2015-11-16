@@ -5,6 +5,7 @@ namespace staticsquish;
 
 use \Twig_Environment;
 use \Twig_Loader_Filesystem;
+use staticsquish\twig\extensions\InternalLinkHelper;
 
 
 /**
@@ -33,6 +34,7 @@ class TwigHelper {
     $this->twig = new Twig_Environment($loader, array(
       'cache' => $this->cacheDir->get(),
     ));
+    $this->twig->addExtension(new InternalLinkHelper($site->getConfig()));
   }
 
   /**
