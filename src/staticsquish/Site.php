@@ -11,6 +11,9 @@ use staticsquish\models\RootDataObject;
 use staticsquish\aggregation\DistinctValuesAggregation;
 use staticsquish\filters\RootDataObjectFilter;
 use staticsquish\filters\FieldFilter;
+use staticsquish\themes\BaseTheme;
+use staticsquish\themes\movefast\MoveFastTheme;
+
 /**
  *  @license 3-clause BSD
  */
@@ -23,6 +26,9 @@ class Site {
 
 	/** @var  Config */
 	protected $config;
+
+	/** @var BaseTheme **/
+	protected $theme;
 
 	function __construct(Container $app, $dir)
 	{
@@ -37,6 +43,8 @@ class Site {
 				$loader->loadConfigInSite($this->config, $this);
 			}
 		}
+
+		$this->theme = new MoveFastTheme($this->app);
 
   }
 
@@ -84,97 +92,7 @@ class Site {
 			$this->load();
 		}
 
-		$twigHelper = new TwigHelper($this);
-		$twig = $twigHelper->getTwig();
-
-		$outFolder = new OutFolder($outDir);
-
-		// General Data
-		$data = array(
-			'config'=>$this->config,
-			'allRootDataObjects'=>$this->rootDataObjects,
-		);
-
-		// Index
-		$outFolder->addFileContents(
-			'',
-			'index.html',
-			$twig->render('index.html.twig', array_merge($data, array(
-			)))
-		);
-
-		// Data
-		$outFolder->addFileContents(
-			'',
-			'data.html',
-			$twig->render('data.html.twig', array_merge($data, array(
-			)))
-		);
-
-		// Root Objects
-		mkdir($outDir.DIRECTORY_SEPARATOR.'data');
-		foreach($this->rootDataObjects as $rootDataObject) {
-			$dataDir = $outDir.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$rootDataObject->getSlug();
-			// index
-			$outFolder->addFileContents(
-				'data'.DIRECTORY_SEPARATOR.$rootDataObject->getSlug(),
-				'index.html',
-				$twig->render('rootdataobject/index.html.twig', array_merge($data, array(
-					'rootDataObject'=>$rootDataObject,
-				)))
-			);
-			// files
-			mkdir($dataDir.DIRECTORY_SEPARATOR.'files');
-			foreach($rootDataObject->getFiles() as $file) {
-				copy($file->getDir().DIRECTORY_SEPARATOR.$file->getName(), $dataDir.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$file->getName() );
-			}
-		}
-
-		// Field Objects
-		mkdir($outDir.DIRECTORY_SEPARATOR.'field');
-		foreach($this->config->fields as $key => $fieldConfig) {
-			$dataDir = $outDir.DIRECTORY_SEPARATOR.'field'.DIRECTORY_SEPARATOR.$key;
-			$aggregation = new DistinctValuesAggregation(new RootDataObjectFilter($this), $key);
-
-			// index
-			$values = array();
-			foreach($aggregation->getValues() as $value) {
-				$values[md5($value)] = $value;
-			}
-			$outFolder->addFileContents(
-				'field'.DIRECTORY_SEPARATOR.$key,
-				'index.html',
-				$twig->render('field/index.html.twig', array_merge($data, array(
-					'fieldKey'=>$key,
-					'fieldConfig'=>$fieldConfig,
-					'values' => $values,
-				)))
-			);
-
-			// values
-			mkdir($outDir.DIRECTORY_SEPARATOR.'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR);
-			foreach($aggregation->getValues() as $fieldValue) {
-				$fieldValueKey=md5($fieldValue);
-
-				$filter = new RootDataObjectFilter($this);
-				$filter->addFieldFilter(new FieldFilter($this, $key, $fieldValue));
-
-				$outFolder->addFileContents(
-					'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR.$fieldValueKey,
-					'index.html',
-					$twig->render('field/value/index.html.twig', array_merge($data, array(
-						'fieldKey'=>$key,
-						'fieldConfig'=>$fieldConfig,
-						'fieldValue' => $fieldValue,
-						'rootDataObjects' => $filter->getRootDataObjects(),
-					)))
-				);
-
-			}
-		}
-
-		// theme
-		$outFolder->copyFolder(APP_ROOT_DIR.'theme'.DIRECTORY_SEPARATOR.$this->config->theme.DIRECTORY_SEPARATOR.'files');
+		$this->theme->write($this, $outDir);
 
 	}
 
