@@ -42,8 +42,8 @@ class Site {
 
 	protected $isLoaded = false;
 
-	protected $dataErrors = array();
-	protected $dataWarnings = array();
+	protected $errors = array();
+	protected $warnings = array();
 
 	protected $rootDataObjects = array();
 
@@ -207,23 +207,23 @@ class Site {
 	/**
 	 * @return array
 	 */
-	public function getDataErrors()
+	public function geterrors()
 	{
 		if (!$this->isLoaded) {
 			$this->load();
 		}
-		return $this->dataErrors;
+		return $this->errors;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getDataWarnings()
+	public function getWarnings()
 	{
 		if (!$this->isLoaded) {
 			$this->load();
 		}
-		return $this->dataWarnings;
+		return $this->warnings;
 	}
 
 

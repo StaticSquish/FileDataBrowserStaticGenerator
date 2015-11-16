@@ -14,8 +14,8 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 
 		$site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteDefaults');
 
-		$this->assertEquals(0, count($site->getDataWarnings()));
-		$this->assertEquals(0, count($site->getDataErrors()));
+		$this->assertEquals(0, count($site->getWarnings()));
+		$this->assertEquals(0, count($site->getErrors()));
 
 		$rootDataObjects = $site->getRootDataObjects();
 		$this->assertEquals(1, count($rootDataObjects));
@@ -32,8 +32,8 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 
 		$site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteData');
 
-		$this->assertEquals(0, count($site->getDataWarnings()));
-		$this->assertEquals(0, count($site->getDataErrors()));
+		$this->assertEquals(0, count($site->getWarnings()));
+		$this->assertEquals(0, count($site->getErrors()));
 
 		$rootDataObjects = $site->getRootDataObjects();
 		$this->assertEquals(2, count($rootDataObjects));
