@@ -13,6 +13,8 @@ use staticsquish\filters\RootDataObjectFilter;
 use staticsquish\filters\FieldFilter;
 use staticsquish\themes\BaseTheme;
 use staticsquish\themes\movefast\MoveFastTheme;
+use staticsquish\errors\DataErrorTwoRootObjectsHaveSameSlug;
+
 
 /**
  *  @license 3-clause BSD
@@ -82,6 +84,11 @@ class Site {
 	}
 
 	protected function addRootDataObject(RootDataObject $rootDataObject) {
+		foreach($this->rootDataObjects as $existingRootDataObject) {
+			if ($existingRootDataObject->getSlug() == $rootDataObject->getSlug()) {
+				$this->errors[] = new DataErrorTwoRootObjectsHaveSameSlug();
+			}
+		}
 		$this->rootDataObjects[] = $rootDataObject;
 	}
 
