@@ -1,0 +1,7 @@
+[colour]
+
+red
+
+[shape]
+
+box
