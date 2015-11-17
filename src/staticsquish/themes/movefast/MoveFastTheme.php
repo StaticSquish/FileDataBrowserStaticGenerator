@@ -14,6 +14,7 @@ use staticsquish\filters\FieldFilterNoValue;
 use staticsquish\themes\BaseTheme;
 use staticsquish\TwigHelper;
 use staticsquish\OutFolder;
+use staticsquish\themes\movefast\writecomponents\IndexWriteComponent;
 
 class MoveFastTheme extends BaseTheme
 {
@@ -35,12 +36,9 @@ class MoveFastTheme extends BaseTheme
   		);
 
   		// Index
-  		$outFolder->addFileContents(
-  			'',
-  			'index.html',
-  			$twig->render('index.html.twig', array_merge($data, array(
-  			)))
-  		);
+      $wc = new IndexWriteComponent($this->app, $site, $outFolder, $twigHelper);
+      $wc->write();
+
 
   		// Data
   		$outFolder->addFileContents(
