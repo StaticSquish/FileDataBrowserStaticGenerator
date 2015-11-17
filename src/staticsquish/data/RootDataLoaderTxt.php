@@ -44,6 +44,8 @@ class RootDataLoaderTxt extends  BaseRootDataLoader {
 
         $fieldConfig = isset($site->getConfig()->fields[$k]) ? $site->getConfig()->fields[$k] : null;
 
+        $field = null;
+
         if ($fieldConfig && $fieldConfig->isList) {
 
           $field = new FieldListValue;
@@ -53,10 +55,15 @@ class RootDataLoaderTxt extends  BaseRootDataLoader {
 
         } else {
           // no config - just treat as string
-          $field = new FieldValue($fileLoader->getAsValue($k));
+          $fieldPossible = new FieldValue($fileLoader->getAsValue($k));
+          if ($fieldPossible->hasValue()) {
+            $field = $fieldPossible;
+          }
         }
 
-        $r->addField($k, $field);
+        if ($field) {
+          $r->addField($k, $field);
+        }
       }
     }
 
