@@ -38,11 +38,25 @@ class FieldWriteComponent extends BaseWriteTwigComponent
           'count'=>$filter->getRootDataObjectCount(),
         );
       }
+
       usort($values, 'staticsquish\themes\movefast\writecomponents\FieldWriteComponent::sortByValue');
       $this->outFolder->addFileContents(
         'field'.DIRECTORY_SEPARATOR.$key,
         'index.html',
         $this->twigHelper->getTwig()->render('field/index.html.twig', array_merge($this->baseViewParameters, array(
+          'fieldKey'=>$key,
+          'fieldConfig'=>$fieldConfig,
+          'values' => $values,
+          'rootDataWithNoValues' => (count($rootDataWithNoValues) > 0),
+          'rootDataWithNoValuesCount' => count($rootDataWithNoValues),
+        )))
+      );
+
+      usort($values, 'staticsquish\themes\movefast\writecomponents\FieldWriteComponent::sortByCount');
+      $this->outFolder->addFileContents(
+        'field'.DIRECTORY_SEPARATOR.$key,
+        'indexSortByCount.html',
+        $this->twigHelper->getTwig()->render('field/indexSortByCount.html.twig', array_merge($this->baseViewParameters, array(
           'fieldKey'=>$key,
           'fieldConfig'=>$fieldConfig,
           'values' => $values,
@@ -95,6 +109,13 @@ class FieldWriteComponent extends BaseWriteTwigComponent
       return 0;
     }
     return ($a['value'] < $b['value']) ? -1 : 1;
+  }
+
+  protected static function sortByCount($a, $b) {
+    if ($a['count'] == $b['count']) {
+      return 0;
+    }
+    return ($a['count'] > $b['count']) ? -1 : 1;
   }
 
 }

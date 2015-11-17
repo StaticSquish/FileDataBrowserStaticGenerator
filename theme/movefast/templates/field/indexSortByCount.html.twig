@@ -12,17 +12,17 @@
 
 	<h1>{{ fieldConfig.label }}</h1>
 
-	{% if values|length > 1 %}
-   	<div class="dropdown dropdown-menu-right">
-   	  <button class="btn btn-default dropdown-toggle pull-right" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-   	    Sort By Value
-   	    <span class="caret"></span>
-   	  </button>
-   	  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-   	    <li><a href="{{ ('/field/' ~ fieldKey ) | internalLinkToDir }}">Value</a></li>
-   	    <li><a href="{{ ('/field/' ~ fieldKey ~ '/indexSortByCount.html') | internalLink }}">Count</a></li>
-   	  </ul>
-   	</div>
+ {% if values|length > 1 %}
+  	<div class="dropdown">
+  	  <button class="btn btn-default dropdown-toggle pull-right" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  	    Sort By Count
+  	    <span class="caret"></span>
+  	  </button>
+  	  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+  	    <li><a href="{{ ('/field/' ~ fieldKey ) | internalLinkToDir }}">Value</a></li>
+  	    <li><a href="{{ ('/field/' ~ fieldKey ~ '/indexSortByCount.html') | internalLink }}">Count</a></li>
+  	  </ul>
+  	</div>
   {% endif %}
 
 	<ul>
