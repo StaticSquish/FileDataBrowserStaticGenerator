@@ -1,6 +1,7 @@
 <?php
 
 use staticsquish\FileLoaderTxt;
+use staticsquish\config\FieldConfig;
 
 /**
 *  @license 3-clause BSD
@@ -9,7 +10,11 @@ class TextLoad1Test extends PHPUnit_Framework_TestCase {
 
 
   function test1() {
-    $fileLoader = new FileLoaderTxt(__DIR__. DIRECTORY_SEPARATOR.'test1.txt');
+
+    $fieldConfig = new FieldConfig();
+    $fieldConfig->isList = true;
+
+    $fileLoader = new FileLoaderTxt(__DIR__. DIRECTORY_SEPARATOR.'test1.txt', array('tags'=>$fieldConfig));
 
     $keys = $fileLoader->getKeys();
     $this->assertEquals(2, count($keys));

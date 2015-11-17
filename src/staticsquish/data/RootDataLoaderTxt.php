@@ -23,19 +23,19 @@ class RootDataLoaderTxt extends  BaseRootDataLoader {
   function loadRootDataInSite(Site $site, $filename)
   {
 
-    $fileLoader = new FileLoaderTxt($site->getDir().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$filename.DIRECTORY_SEPARATOR."data.txt");
+    $fileLoader = new FileLoaderTxt($site->getDir().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$filename.DIRECTORY_SEPARATOR."data.txt", $site->getConfig()->fields);
 
     $r = new RootDataObject();
     $r->setSlug($filename);
     $r->setTitle($filename);
 
-    if ($fileLoader->hasKey('title')) {
+    if ($fileLoader->hasAsValue('title')) {
       $r->setTitle($fileLoader->getAsValue('title'));
     }
-    if ($fileLoader->hasKey('description')) {
+    if ($fileLoader->hasAsValue('description')) {
       $r->setDescription($fileLoader->getAsValue('description'));
     }
-    if ($fileLoader->hasKey('slug')) {
+    if ($fileLoader->hasAsValue('slug')) {
       $r->setSlug($fileLoader->getAsValue('slug'));
     }
 
