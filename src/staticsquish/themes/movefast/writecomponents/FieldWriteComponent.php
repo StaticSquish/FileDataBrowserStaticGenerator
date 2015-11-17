@@ -38,6 +38,7 @@ class FieldWriteComponent extends BaseWriteTwigComponent
           'count'=>$filter->getRootDataObjectCount(),
         );
       }
+      usort($values, 'staticsquish\themes\movefast\writecomponents\FieldWriteComponent::sortByValue');
       $this->outFolder->addFileContents(
         'field'.DIRECTORY_SEPARATOR.$key,
         'index.html',
@@ -87,6 +88,13 @@ class FieldWriteComponent extends BaseWriteTwigComponent
 
 
 
+  }
+
+  protected static function sortByValue($a, $b) {
+    if ($a['value'] == $b['value']) {
+      return 0;
+    }
+    return ($a['value'] < $b['value']) ? -1 : 1;
   }
 
 }
