@@ -1,11 +1,11 @@
 <?php
 
 
-namespace openacalendar\staticweb\dataerrors;
+namespace staticsquish\errors;
 
 /**
  *  @license 3-clause BSD
  */
-abstract class BaseDataError {
+abstract class BaseError {
 
 }

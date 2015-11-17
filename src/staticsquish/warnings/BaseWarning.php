@@ -1,11 +1,11 @@
 <?php
 
 
-namespace staticsquish\datawarnings;
+namespace staticsquish\warnings;
 
 /**
  *  @license 3-clause BSD
  */
-abstract class BaseDataWarning {
+abstract class BaseWarning {
 
 }
