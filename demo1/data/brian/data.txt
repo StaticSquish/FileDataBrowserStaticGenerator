@@ -14,3 +14,7 @@ Sleeping
 [paws]
 
 4 Little Paws!
+
+[toys]
+
+Ball of Wool

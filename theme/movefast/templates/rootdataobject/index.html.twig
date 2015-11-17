@@ -31,6 +31,11 @@
 			{% endif %}
 	{% endfor %}
 
+	{% for key,field in fieldsWithNoValue %}
+		<p><a href="{{ ('/field/' ~ key ) | internalLinkToDir }}">{{ config.fields[key].label }}</a></p>
+		<p>No Value Known</p>
+	{% endfor %}
+
 	{% if rootDataObject.files %}
 		<h2>Files</h2>
 		<ul class="list-group">

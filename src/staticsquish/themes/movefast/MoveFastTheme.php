@@ -53,12 +53,19 @@ class MoveFastTheme extends BaseTheme
   		mkdir($dir.DIRECTORY_SEPARATOR.'data');
   		foreach($site->getRootDataObjects() as $rootDataObject) {
   			$dataDir = $dir.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$rootDataObject->getSlug();
+        $fieldsWithNoValue = array();
+        foreach ($site->getConfig()->fields as $key=>$field) {
+          if (!$rootDataObject->hasField($key)) {
+            $fieldsWithNoValue[$key] = $field;
+          }
+        }
   			// index
   			$outFolder->addFileContents(
   				'data'.DIRECTORY_SEPARATOR.$rootDataObject->getSlug(),
   				'index.html',
   				$twig->render('rootdataobject/index.html.twig', array_merge($data, array(
   					'rootDataObject'=>$rootDataObject,
+            'fieldsWithNoValue'=>$fieldsWithNoValue,
   				)))
   			);
   			// files

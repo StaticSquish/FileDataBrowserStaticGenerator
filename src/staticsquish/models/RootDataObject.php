@@ -128,4 +128,13 @@ class RootDataObject {
         return isset($this->fields[$name]) ? $this->fields[$name] : null;
     }
 
+    /**
+     *
+     * @return mixed
+     */
+    public function hasField($name)
+    {
+        return isset($this->fields[$name]);
+    }
+
 }
