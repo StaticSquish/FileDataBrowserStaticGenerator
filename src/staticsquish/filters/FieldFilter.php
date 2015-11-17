@@ -11,7 +11,7 @@ use staticsquish\models\FieldValue;
 /**
  *  @license 3-clause BSD
  */
-class FieldFilter {
+class FieldFilter implements InterfaceFieldFilter {
 
     /** @var Site **/
     protected $site;

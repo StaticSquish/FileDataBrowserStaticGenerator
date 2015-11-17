@@ -19,6 +19,12 @@
 				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ key) | internalLinkToDir }}" class="btn btn-default">View</a>
 			</li>
 		{% endfor %}
+		{% if rootDataWithNoValues %}
+			<li>
+				<a href="{{ ('/field/' ~ fieldKey ~ '/value/none') | internalLinkToDir }}">No Value</a>
+				<a href="{{ ('/field/' ~ fieldKey ~ '/value/none') | internalLinkToDir }}" class="btn btn-default">View</a>
+			</li>
+		{% endif %}
 	</ul>
 
 {% endblock %}

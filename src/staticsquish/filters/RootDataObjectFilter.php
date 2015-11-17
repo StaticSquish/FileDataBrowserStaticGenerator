@@ -20,7 +20,7 @@ class RootDataObjectFilter {
 
   protected $fieldFilters = array();
 
-  public function addFieldFilter(FieldFilter $fieldFilter) {
+  public function addFieldFilter(InterfaceFieldFilter $fieldFilter) {
     $this->fieldFilters[] = $fieldFilter;
   }
 

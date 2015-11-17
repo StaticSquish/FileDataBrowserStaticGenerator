@@ -24,4 +24,13 @@ class FieldListValue extends BaseField {
     $this->values[] = $fieldValue;
   }
 
+  public function hasValue() {
+    foreach($this->values as $value) {
+      if ($value->hasValue()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

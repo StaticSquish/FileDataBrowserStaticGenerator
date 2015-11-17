@@ -38,4 +38,9 @@ class FieldValue extends BaseField  {
       return $this;
   }
 
+
+  public function hasValue() {
+      return (boolean)$this->value;
+  }
+
 }

@@ -1,0 +1,30 @@
+{# @license 3-clause BSD #}
+
+
+{% extends 'page.html.twig' %}
+
+{% block content %}
+
+	<ol class="breadcrumb">
+		<li><a href="{{ '/' | internalLinkToDir }}">Home</a></li>
+		<li><a href="{{ ('/field/' ~ fieldKey ) | internalLinkToDir }}">Field: {{ fieldConfig.label }}</a></li>
+		<li class="active">No value set</li>
+	</ol>
+
+	<h1>{{ fieldConfig.label }}: No value set</h1>
+
+	{% if rootDataObjects %}
+		<ul>
+			{% for rootDataObject in rootDataObjects %}
+				<li>
+					<h2><a href="{{ ('/data/' ~  rootDataObject.slug) | internalLinkToDir }}">{{ rootDataObject.title }}</a></h2>
+					<p>{{ rootDataObject.description | nl2br }}</p>
+					<a href="{{ ('/data/' ~  rootDataObject.slug) | internalLinkToDir }}" class="btn btn-default">View</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>No data to show.</p>
+	{% endif %}
+
+{% endblock %}
