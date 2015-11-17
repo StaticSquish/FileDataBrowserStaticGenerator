@@ -13,15 +13,15 @@
 	<h1>{{ fieldConfig.label }}</h1>
 
 	<ul>
-		{% for key, value in values %}
+		{% for key, data in values %}
 			<li>
-				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ key) | internalLinkToDir }}">{{ value }}</a>
+				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ key) | internalLinkToDir }}">{{ data.value }} ({{ data.count }})</a>
 				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ key) | internalLinkToDir }}" class="btn btn-default">View</a>
 			</li>
 		{% endfor %}
 		{% if rootDataWithNoValues %}
 			<li>
-				<a href="{{ ('/field/' ~ fieldKey ~ '/value/none') | internalLinkToDir }}">No Value</a>
+				<a href="{{ ('/field/' ~ fieldKey ~ '/value/none') | internalLinkToDir }}">No Value ({{ rootDataWithNoValuesCount }})</a>
 				<a href="{{ ('/field/' ~ fieldKey ~ '/value/none') | internalLinkToDir }}" class="btn btn-default">View</a>
 			</li>
 		{% endif %}

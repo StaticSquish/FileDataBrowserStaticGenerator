@@ -89,7 +89,12 @@ class MoveFastTheme extends BaseTheme
   			// index
   			$values = array();
   			foreach($aggregation->getValues() as $value) {
-  				$values[md5($value)] = $value;
+          $filter = new RootDataObjectFilter($site);
+          $filter->addFieldFilter(new FieldFilter($site, $key, $value));
+  				$values[md5($value)] = array(
+            'value'=>$value,
+            'count'=>$filter->getRootDataObjectCount(),
+          );
   			}
   			$outFolder->addFileContents(
   				'field'.DIRECTORY_SEPARATOR.$key,
@@ -99,6 +104,7 @@ class MoveFastTheme extends BaseTheme
   					'fieldConfig'=>$fieldConfig,
   					'values' => $values,
             'rootDataWithNoValues' => (count($rootDataWithNoValues) > 0),
+            'rootDataWithNoValuesCount' => count($rootDataWithNoValues),
   				)))
   			);
 
