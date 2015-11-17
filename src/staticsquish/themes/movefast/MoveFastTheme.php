@@ -15,6 +15,7 @@ use staticsquish\themes\BaseTheme;
 use staticsquish\TwigHelper;
 use staticsquish\OutFolder;
 use staticsquish\themes\movefast\writecomponents\IndexWriteComponent;
+use staticsquish\themes\movefast\writecomponents\DataWriteComponent;
 
 class MoveFastTheme extends BaseTheme
 {
@@ -41,12 +42,9 @@ class MoveFastTheme extends BaseTheme
 
 
   		// Data
-  		$outFolder->addFileContents(
-  			'',
-  			'data.html',
-  			$twig->render('data.html.twig', array_merge($data, array(
-  			)))
-  		);
+      $wc = new DataWriteComponent($this->app, $site, $outFolder, $twigHelper);
+      $wc->write();
+      
 
   		// Root Objects
   		mkdir($dir.DIRECTORY_SEPARATOR.'data');
