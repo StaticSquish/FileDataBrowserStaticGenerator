@@ -13,4 +13,6 @@ class FieldConfig {
 
 	public $label = '';
 
+	public $timezone = 'UTC';
+
 }

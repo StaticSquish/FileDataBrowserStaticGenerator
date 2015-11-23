@@ -3,14 +3,18 @@
 
 namespace staticsquish\models;
 
+use staticsquish\config\FieldConfig;
+
 /**
  *  @license 3-clause BSD
  */
 class FieldScalarValueDateTime extends BaseFieldScalarValue  {
 
   protected $value;
+  protected $timezone;
 
-  public function __construct($value) {
+  public function __construct($value, FieldConfig $fieldConfig = null) {
+    $this->timezone = $fieldConfig ? $fieldConfig->timezone : 'UTC';
     $this->setValue($value);
   }
 
@@ -45,7 +49,7 @@ class FieldScalarValueDateTime extends BaseFieldScalarValue  {
    */
   public function setValue($value)
   {
-      $this->value = new \DateTime( $value );
+      $this->value = new \DateTime( $value , new \DateTimeZone($this->timezone));
 
       return $this;
   }

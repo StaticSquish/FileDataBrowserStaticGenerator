@@ -51,6 +51,9 @@ class ConfigLoaderIni extends BaseConfigLoader {
 				if (isset($fieldOptions['label'])) {
 					$config->fields[$fieldName]->label = $fieldOptions['label'];
 				}
+				if (isset($fieldOptions['timezone'])) {
+					$config->fields[$fieldName]->timezone = $fieldOptions['timezone'];
+				}
 
 
 			}

@@ -75,7 +75,7 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 
 	protected function getFieldValue($data, $fieldConfig = null) {
 		if ($fieldConfig && $fieldConfig->isDateTime) {
-			return new FieldScalarValueDateTime($data);
+			return new FieldScalarValueDateTime($data, $fieldConfig);
 		}
 
 		return new FieldScalarValueText($data);
