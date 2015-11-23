@@ -43,7 +43,7 @@ class FileLoaderTxt {
   }
 
   protected function setValue($field, $value) {
-      if (isset($this->fieldConfigs[$field]) && isset($this->fieldConfigs[$field]->isList)) {
+      if (isset($this->fieldConfigs[$field]) && $this->fieldConfigs[$field]->isList) {
         $out = array();
         foreach(explode("\n", $value) as $line) {
           if (trim($line)) {
