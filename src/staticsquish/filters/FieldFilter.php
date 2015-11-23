@@ -6,7 +6,7 @@ namespace staticsquish\filters;
 use staticsquish\Site;
 use staticsquish\models\RootDataObject;
 use staticsquish\models\FieldListValue;
-use staticsquish\models\FieldValue;
+use staticsquish\models\BaseFieldScalarValue;
 
 /**
  *  @license 3-clause BSD
@@ -20,7 +20,7 @@ class FieldFilter implements InterfaceFieldFilter {
 
     protected $fieldValue;
 
-    public function __construct(Site $site, $fieldName, $fieldValue) {
+    public function __construct(Site $site, $fieldName, BaseFieldScalarValue $fieldValue) {
       $this->site = $site;
       $this->fieldName = $fieldName;
       $this->fieldValue = $fieldValue;
@@ -35,14 +35,15 @@ class FieldFilter implements InterfaceFieldFilter {
           return false;
         } else if (is_a($field, 'staticsquish\models\FieldListValue')) {
           return $this->doesFieldListValuePass($field);
-        } else if (is_a($field, 'staticsquish\models\FieldValue')) {
+        } else if (is_a($field, 'staticsquish\models\BaseFieldScalarValue')) {
           return $this->doesFieldValuePass($field);
         }
 
     }
 
-    protected function doesFieldValuePass(FieldValue $fieldValue) {
-      return ($fieldValue->getValue() == $this->fieldValue);
+    protected function doesFieldValuePass(BaseFieldScalarValue $fieldValue) {
+      // TODO this should be a compareForFilter() function on class or something, so different types can do differently!
+      return ($fieldValue->getValue() == $this->fieldValue->getValue());
     }
 
     protected function doesFieldListValuePass(FieldListValue $fieldListValue) {

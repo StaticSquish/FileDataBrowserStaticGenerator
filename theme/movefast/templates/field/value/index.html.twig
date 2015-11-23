@@ -8,10 +8,10 @@
 	<ol class="breadcrumb">
 		<li><a href="{{ '/' | internalLinkToDir }}">Home</a></li>
 		<li><a href="{{ ('/field/' ~ fieldKey ) | internalLinkToDir }}">Field: {{ fieldConfig.label }}</a></li>
-		<li class="active">Value: {{ fieldValue|slice(0,50) }}</li>
+		<li class="active">Value: {{ fieldValue.getValueAsString|slice(0,50) }}</li>
 	</ol>
 
-	<h1>{{ fieldConfig.label }}: {{ fieldValue }}</h1>
+	<h1>{{ fieldConfig.label }}: {{ fieldValue.getValueAsString }}</h1>
 
 	<ul>
     {% for rootDataObject in rootDataObjects %}

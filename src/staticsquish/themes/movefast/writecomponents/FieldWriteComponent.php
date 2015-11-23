@@ -33,7 +33,7 @@ class FieldWriteComponent extends BaseWriteTwigComponent
       foreach($aggregation->getValues() as $value) {
         $filter = new RootDataObjectFilter($this->site);
         $filter->addFieldFilter(new FieldFilter($this->site, $key, $value));
-        $values[md5($value)] = array(
+        $values[$value->getValueKeyForWeb()] = array(
           'value'=>$value,
           'count'=>$filter->getRootDataObjectCount(),
         );
@@ -68,13 +68,11 @@ class FieldWriteComponent extends BaseWriteTwigComponent
       // values
       mkdir($dir.DIRECTORY_SEPARATOR.'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR);
       foreach($aggregation->getValues() as $fieldValue) {
-        $fieldValueKey=md5($fieldValue);
-
         $filter = new RootDataObjectFilter($this->site);
         $filter->addFieldFilter(new FieldFilter($this->site, $key, $fieldValue));
 
         $this->outFolder->addFileContents(
-          'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR.$fieldValueKey,
+          'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR.$fieldValue->getValueKeyForWeb(),
           'index.html',
           $this->twigHelper->getTwig()->render('field/value/index.html.twig', array_merge($this->baseViewParameters, array(
             'fieldKey'=>$key,

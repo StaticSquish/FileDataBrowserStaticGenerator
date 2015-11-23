@@ -105,7 +105,7 @@ class RootDataObject {
         return $this->files;
     }
 
-    public function addField($key, BaseField $field) {
+    public function addField($key, BaseFieldValue $field) {
       $this->fields[$key] = $field;
     }
 

@@ -45,6 +45,9 @@ class ConfigLoaderIni extends BaseConfigLoader {
 				if (isset($fieldOptions['is_list'])) {
 					$config->fields[$fieldName]->isList = (boolean)$fieldOptions['is_list'];
 				}
+				if (isset($fieldOptions['is_datetime'])) {
+					$config->fields[$fieldName]->isDateTime = (boolean)$fieldOptions['is_datetime'];
+				}
 				if (isset($fieldOptions['label'])) {
 					$config->fields[$fieldName]->label = $fieldOptions['label'];
 				}

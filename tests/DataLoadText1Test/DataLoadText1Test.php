@@ -31,13 +31,13 @@ class DataLoadText1Test extends PHPUnit_Framework_TestCase {
 
     $this->assertTrue($rootDataObject->hasField('colour'));
     $this->assertNotNull($fields['colour']);
-    $this->assertEquals('staticsquish\models\FieldValue', get_class( $fields['colour']));
+    $this->assertEquals('staticsquish\models\FieldScalarValueText', get_class( $fields['colour']));
     $this->assertTrue($fields['colour']->hasValue());
     $this->assertEquals('red', $fields['colour']->getValue());
 
     $this->assertTrue($rootDataObject->hasField('shape'));
     $this->assertNotNull($fields['shape']);
-    $this->assertEquals('staticsquish\models\FieldValue', get_class( $fields['shape']));
+    $this->assertEquals('staticsquish\models\FieldScalarValueText', get_class( $fields['shape']));
     $this->assertTrue($fields['shape']->hasValue());
     $this->assertEquals('box', $fields['shape']->getValue());
 
@@ -56,7 +56,7 @@ class DataLoadText1Test extends PHPUnit_Framework_TestCase {
 
     $this->assertTrue($rootDataObject->hasField('shape'));
     $this->assertNotNull($fields['shape']);
-    $this->assertEquals('staticsquish\models\FieldValue', get_class( $fields['shape']));
+    $this->assertEquals('staticsquish\models\FieldScalarValueText', get_class( $fields['shape']));
     $this->assertTrue($fields['shape']->hasValue());
     $this->assertEquals('square', $fields['shape']->getValue());
 

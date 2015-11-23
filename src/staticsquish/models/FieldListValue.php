@@ -6,7 +6,7 @@ namespace staticsquish\models;
 /**
  *  @license 3-clause BSD
  */
-class FieldListValue extends BaseField {
+class FieldListValue extends BaseFieldValue {
 
   protected $values = array();
 
@@ -20,7 +20,7 @@ class FieldListValue extends BaseField {
       return $this->values;
   }
 
-  public function addValue(FieldValue $fieldValue) {
+  public function addValue(BaseFieldScalarValue $fieldValue) {
     $this->values[] = $fieldValue;
   }
 

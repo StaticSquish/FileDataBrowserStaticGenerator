@@ -19,15 +19,15 @@
 				<p><a href="{{ ('/field/' ~ key ) | internalLinkToDir }}">{{ config.fields[key].label }}</a></p>
 				<ul>
 					{% for valueScalar in field.values %}
-						<li>{{ valueScalar.value }}</li>
+						<li>{{ valueScalar.valueAsString }}</li>
 					{% endfor %}
 				</ul>
 			{% elseif config.fields[key] %}
 				<p><a href="{{ ('/field/' ~ key ) | internalLinkToDir }}">{{ config.fields[key].label }}</a></p>
-				<p>{{ field.value }}</p>
+				<p>{{ field.valueAsString }}</p>
 			{% else %}
 				<p>{{ key }}</p>
-				<p>{{ field.value }}</p>
+				<p>{{ field.valueAsString }}</p>
 			{% endif %}
 	{% endfor %}
 

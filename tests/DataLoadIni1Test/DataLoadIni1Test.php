@@ -52,11 +52,11 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(2, count($fieldScalars));
 
 		$fieldScalar = $fieldScalars[0];
-		$this->assertEquals('staticsquish\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('staticsquish\models\FieldScalarValueText', get_class($fieldScalar));
 		$this->assertEquals('red', $fieldScalar->getValue());
 
 		$fieldScalar = $fieldScalars[1];
-		$this->assertEquals('staticsquish\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('staticsquish\models\FieldScalarValueText', get_class($fieldScalar));
 		$this->assertEquals('orange', $fieldScalar->getValue());
 
 		// SECOND OBJECT
@@ -72,15 +72,15 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(3, count($fieldScalars));
 
 		$fieldScalar = $fieldScalars[0];
-		$this->assertEquals('staticsquish\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('staticsquish\models\FieldScalarValueText', get_class($fieldScalar));
 		$this->assertEquals('red', $fieldScalar->getValue());
 
 		$fieldScalar = $fieldScalars[1];
-		$this->assertEquals('staticsquish\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('staticsquish\models\FieldScalarValueText', get_class($fieldScalar));
 		$this->assertEquals('green', $fieldScalar->getValue());
 
 		$fieldScalar = $fieldScalars[2];
-		$this->assertEquals('staticsquish\models\FieldValue', get_class($fieldScalar));
+		$this->assertEquals('staticsquish\models\FieldScalarValueText', get_class($fieldScalar));
 		$this->assertEquals('blue', $fieldScalar->getValue());
 
 		// Site Data
@@ -89,10 +89,17 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$values = $aggregation->getValues();
 		$this->assertEquals(4, count($values));
 
-		$this->assertEquals('red', $values[0]);
-		$this->assertEquals('orange', $values[1]);
-		$this->assertEquals('green', $values[2]);
-		$this->assertEquals('blue', $values[3]);
+		$this->assertTrue(isset($values['red']));
+		$this->assertEquals('red', $values['red']->getValue());
+
+		$this->assertTrue(isset($values['orange']));
+		$this->assertEquals('orange', $values['orange']->getValue());
+
+		$this->assertTrue(isset($values['green']));
+		$this->assertEquals('green', $values['green']->getValue());
+
+		$this->assertTrue(isset($values['blue']));
+		$this->assertEquals('blue', $values['blue']->getValue());
 	}
 
 

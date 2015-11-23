@@ -6,7 +6,7 @@ namespace staticsquish\models;
 /**
  *  @license 3-clause BSD
  */
-class FieldValue extends BaseField  {
+class FieldScalarValueText extends BaseFieldScalarValue  {
 
   protected $value;
 
@@ -22,6 +22,18 @@ class FieldValue extends BaseField  {
   public function getValue()
   {
       return $this->value;
+  }
+
+  public function getValueAsString() {
+        return $this->value;
+  }
+
+  public function getValueKey() {
+        return $this->value;
+  }
+
+  public function getValueKeyForWeb() {
+        return md5($this->value);
   }
 
   /**

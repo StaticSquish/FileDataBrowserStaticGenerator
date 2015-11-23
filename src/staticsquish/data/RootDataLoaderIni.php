@@ -5,7 +5,8 @@ namespace staticsquish\data;
 use staticsquish\Site;
 use staticsquish\models\RootDataObject;
 use staticsquish\models\File;
-use staticsquish\models\FieldValue;
+use staticsquish\models\FieldScalarValueText;
+use staticsquish\models\FieldScalarValueDateTime;
 use staticsquish\models\FieldListValue;
 
 /**
@@ -47,12 +48,12 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 
 							$field = new FieldListValue;
 							foreach(explode(',', $data['data'][$k]) as $valueBit) {
-								$field->addValue(new FieldValue(trim($valueBit)));
+								$field->addValue($this->getFieldValue(trim($valueBit), $fieldConfig));
 							}
 
 					} else {
 						// no config - just treat as string
-						$field = new FieldValue($data['data'][$k]);
+						$field = $this->getFieldValue($data['data'][$k], $fieldConfig);
 					}
 
 					$r->addField($k, $field);
@@ -69,6 +70,15 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 		}
 
 		return $r;
+
+	}
+
+	protected function getFieldValue($data, $fieldConfig = null) {
+		if ($fieldConfig && $fieldConfig->isDateTime) {
+			return new FieldScalarValueDateTime($data);
+		}
+
+		return new FieldScalarValueText($data);
 
 	}
 

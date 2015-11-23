@@ -9,6 +9,8 @@ class FieldConfig {
 
 	public $isList = false;
 
+	public $isDateTime = false;
+
 	public $label = '';
 
 }
