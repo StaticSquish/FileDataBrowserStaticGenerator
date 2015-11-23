@@ -20,7 +20,7 @@ class DistinctValuesAggregation {
     $this->fieldName = $fieldName;
   }
 
-  protected $data = array();
+  protected $data = null;
 
   protected function checkValue(BaseFieldScalarValue $value) {
     if (!isset($this->data[$value->getValueKey()])) {
@@ -30,27 +30,26 @@ class DistinctValuesAggregation {
 
   public function getValues() {
 
-    // TODO this builds every time, can we cache it?
+    if (!is_array($this->data)) {
+      $this->data = array();
 
-    $this->data = array();
+      foreach($this->rootDataObjectFilter->getRootDataObjects() as $rootDataObject) {
+        $field = $rootDataObject->getField($this->fieldName);
+        if ($field) {
 
-    foreach($this->rootDataObjectFilter->getRootDataObjects() as $rootDataObject) {
-      $field = $rootDataObject->getField($this->fieldName);
-      if ($field) {
+          if (is_a($field, 'staticsquish\models\BaseFieldScalarValue')) {
+            $this->checkValue($field);
+          } else if (is_a($field, 'staticsquish\models\FieldListValue')) {
+            foreach($field->getValues() as $fieldValueScalar) {
+              $this->checkValue($fieldValueScalar);
+            }
+          };
 
-        if (is_a($field, 'staticsquish\models\BaseFieldScalarValue')) {
-          $this->checkValue($field);
-        } else if (is_a($field, 'staticsquish\models\FieldListValue')) {
-          foreach($field->getValues() as $fieldValueScalar) {
-            $this->checkValue($fieldValueScalar);
-          }
-        };
-
+        }
       }
     }
 
     return $this->data;
-
 
   }
 
