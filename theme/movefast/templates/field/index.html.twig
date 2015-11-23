@@ -28,13 +28,13 @@
 	<ul>
 		{% for data in values %}
 			<li>
-				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ data.value.valueKeyForWeb) | internalLinkToDir }}">{{ data.value.valueAsString }} ({{ data.count }})</a>
+				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ data.value.valueKeyForWeb) | internalLinkToDir }}">{{ data.value.valueAsString }} <span class="badge">{{ data.count }}</span></a>
 				<a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ data.value.valueKeyForWeb) | internalLinkToDir }}" class="btn btn-default">View</a>
 			</li>
 		{% endfor %}
 		{% if rootDataWithNoValues %}
 			<li>
-				<a href="{{ ('/field/' ~ fieldKey ~ '/value/none') | internalLinkToDir }}">No Value ({{ rootDataWithNoValuesCount }})</a>
+				<a href="{{ ('/field/' ~ fieldKey ~ '/value/none') | internalLinkToDir }}">No Value <span class="badge">{{ rootDataWithNoValuesCount }}</span></a>
 				<a href="{{ ('/field/' ~ fieldKey ~ '/value/none') | internalLinkToDir }}" class="btn btn-default">View</a>
 			</li>
 		{% endif %}
