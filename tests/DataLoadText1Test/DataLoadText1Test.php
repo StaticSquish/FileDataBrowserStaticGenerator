@@ -41,6 +41,12 @@ class DataLoadText1Test extends PHPUnit_Framework_TestCase {
     $this->assertTrue($fields['shape']->hasValue());
     $this->assertEquals('box', $fields['shape']->getValue());
 
+    $this->assertTrue($rootDataObject->hasField('started'));
+    $this->assertNotNull($fields['started']);
+    $this->assertEquals('staticsquish\models\FieldScalarValueDateTime', get_class( $fields['started']));
+    $this->assertTrue($fields['started']->hasValue());
+    $this->assertEquals('2015-01-01T10:00:00+00:00', $fields['started']->getValueAsString());
+
 
 
     // SECOND OBJECT
@@ -59,6 +65,9 @@ class DataLoadText1Test extends PHPUnit_Framework_TestCase {
     $this->assertEquals('staticsquish\models\FieldScalarValueText', get_class( $fields['shape']));
     $this->assertTrue($fields['shape']->hasValue());
     $this->assertEquals('square', $fields['shape']->getValue());
+
+    $this->assertFalse($rootDataObject->hasField('started'));
+
 
   }
 

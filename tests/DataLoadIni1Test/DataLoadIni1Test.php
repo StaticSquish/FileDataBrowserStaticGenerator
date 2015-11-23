@@ -46,6 +46,7 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('testone', $rootDataObject->getSlug());
 
 		$fields = $rootDataObject->getFields();
+
 		$this->assertNotNull($fields['colours']);
 		$this->assertEquals('staticsquish\models\FieldListValue', get_class( $fields['colours']));
 		$fieldScalars = $fields['colours']->getValues();
@@ -59,6 +60,13 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('staticsquish\models\FieldScalarValueText', get_class($fieldScalar));
 		$this->assertEquals('orange', $fieldScalar->getValue());
 
+    $this->assertTrue($rootDataObject->hasField('started'));
+    $this->assertNotNull($fields['started']);
+    $this->assertEquals('staticsquish\models\FieldScalarValueDateTime', get_class( $fields['started']));
+    $this->assertTrue($fields['started']->hasValue());
+    $this->assertEquals('2015-05-05T17:30:00+01:00', $fields['started']->getValueAsString());
+
+
 		// SECOND OBJECT
 		$rootDataObject = $rootDataObjects[1];
 
@@ -66,6 +74,7 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('testtwo', $rootDataObject->getSlug());
 
 		$fields = $rootDataObject->getFields();
+
 		$this->assertNotNull($fields['colours']);
 		$this->assertEquals('staticsquish\models\FieldListValue', get_class( $fields['colours']));
 		$fieldScalars = $fields['colours']->getValues();
@@ -82,6 +91,8 @@ class DataLoadIni1Test extends PHPUnit_Framework_TestCase {
 		$fieldScalar = $fieldScalars[2];
 		$this->assertEquals('staticsquish\models\FieldScalarValueText', get_class($fieldScalar));
 		$this->assertEquals('blue', $fieldScalar->getValue());
+
+    $this->assertFalse($rootDataObject->hasField('started'));
 
 		// Site Data
 		$aggregation = new DistinctValuesAggregation(new RootDataObjectFilter($site),'colours');
