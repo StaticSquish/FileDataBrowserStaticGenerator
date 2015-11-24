@@ -88,7 +88,7 @@ class FieldWriteComponent extends BaseWriteTwigComponent
         $this->outFolder->addFileContents(
           'field'.DIRECTORY_SEPARATOR.$key.DIRECTORY_SEPARATOR.'value'.DIRECTORY_SEPARATOR.$fieldValue->getValueKeyForWeb(),
           'index.html',
-          $this->twigHelper->getTwig()->render('field/value/index.html.twig', array_merge($this->baseViewParameters, array(
+          $this->twigHelper->getTwig()->render(($fieldConfig->isLatLng ? 'field/value/index.latlng.html.twig' :  'field/value/index.html.twig') , array_merge($this->baseViewParameters, array(
             'fieldKey'=>$key,
             'fieldConfig'=>$fieldConfig,
             'fieldValue' => $fieldValue,
