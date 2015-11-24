@@ -6,16 +6,19 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<title>{{  config.title }}</title>
-
-    <link href="{{ '/css/bootstrap.min.css' | internalLink }}" rel="stylesheet">
-    <link href="{{ 'css/bootstrap-theme.min.css' | internalLink }}" rel="stylesheet">
+        <link href="{{ '/css/bootstrap.min.css' | internalLink }}" rel="stylesheet">
+        <link href="{{ '/css/bootstrap-theme.min.css' | internalLink }}" rel="stylesheet">
+        <link href="{{ '/css/main.css' | internalLink }}" rel="stylesheet">
+        {% if anyLatLngFields %}
+            <link href="{{ '/leaflet/leaflet.css' | internalLink }}" rel="stylesheet">
+        {% endif %}
 		{% block htmlHeader %}{% endblock %}
 	</head>
 	<body role="document">
 
 		{%  include 'header.html.twig' %}
 
-    <div class="container theme-showcase" role="main">
+        <div class="container theme-showcase" role="main">
 			{% block content %}{% endblock %}
 
 			{%  include 'footer.html.twig' %}
@@ -23,5 +26,9 @@
 
 		<script src="{{ '/js/jquery.min.js' | internalLink }}"></script>
 		<script src="{{ '/js/bootstrap.min.js' | internalLink }}"></script>
+        {% if anyLatLngFields %}
+		      <script src="{{ '/leaflet/leaflet.js' | internalLink }}"></script>
+        {% endif %}
+    	{% block javascriptFooter %}{% endblock %}
 	</body>
 </html>

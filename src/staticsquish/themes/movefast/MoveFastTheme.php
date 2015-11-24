@@ -64,6 +64,7 @@ class MoveFastTheme extends BaseTheme
   				$twig->render('rootdataobject/index.html.twig', array_merge($data, array(
   					'rootDataObject'=>$rootDataObject,
             'fieldsWithNoValue'=>$fieldsWithNoValue,
+            'anyLatLngFields' => $site->getConfig()->isAnyLatLngFields(),
   				)))
   			);
   			// files

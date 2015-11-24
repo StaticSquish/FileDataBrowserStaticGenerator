@@ -19,4 +19,13 @@ class Config {
 
 	public $internalLinkToDirAppendDirectoryIndex = false;
 
+    public function isAnyLatLngFields() {
+        foreach($this->fields as $field) {
+            if ($field->isLatLng) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

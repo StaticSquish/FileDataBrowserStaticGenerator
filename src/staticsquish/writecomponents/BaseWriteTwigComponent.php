@@ -25,8 +25,9 @@ abstract class BaseWriteTwigComponent {
     $this->twigHelper = $twigHelper;
 
     $this->baseViewParameters = array(
-      'config'=>$this->site->getConfig(),
-      'allRootDataObjects'=>$site->getRootDataObjects(),
+      'config' => $this->site->getConfig(),
+      'allRootDataObjects' => $site->getRootDataObjects(),
+      'anyLatLngFields' => $site->getConfig()->isAnyLatLngFields(),
     );
   }
 
