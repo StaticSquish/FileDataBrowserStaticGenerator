@@ -22,3 +22,7 @@ Ball of Wool
 [born]
 
 2015-06-23
+
+[lives]
+
+http://www.openstreetmap.org/#map=19/55.95088/-3.20647

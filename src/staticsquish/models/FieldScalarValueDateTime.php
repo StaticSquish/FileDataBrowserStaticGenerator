@@ -40,6 +40,10 @@ class FieldScalarValueDateTime extends BaseFieldScalarValue  {
       return md5($this->value->format("c"));
   }
 
+    public function isValueEqualTo(BaseFieldValue $compare) {
+        return $this->value == $compare->getValue();
+    }
+
   /**
    * Set the value of Value
    *

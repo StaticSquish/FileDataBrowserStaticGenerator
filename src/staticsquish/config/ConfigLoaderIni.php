@@ -48,6 +48,9 @@ class ConfigLoaderIni extends BaseConfigLoader {
 				if (isset($fieldOptions['is_datetime'])) {
 					$config->fields[$fieldName]->isDateTime = (boolean)$fieldOptions['is_datetime'];
 				}
+				if (isset($fieldOptions['is_latlng'])) {
+					$config->fields[$fieldName]->isLatLng = (boolean)$fieldOptions['is_latlng'];
+				}
 				if (isset($fieldOptions['label'])) {
 					$config->fields[$fieldName]->label = $fieldOptions['label'];
 				}

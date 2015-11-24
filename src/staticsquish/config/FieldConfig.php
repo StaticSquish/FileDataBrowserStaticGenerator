@@ -11,6 +11,8 @@ class FieldConfig {
 
 	public $isDateTime = false;
 
+	public $isLatLng = false;
+
 	public $label = '';
 
 	public $timezone = 'UTC';

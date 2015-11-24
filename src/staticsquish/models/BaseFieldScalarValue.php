@@ -14,4 +14,6 @@ abstract class BaseFieldScalarValue extends BaseFieldValue {
 
   public abstract function getValueKeyForWeb();
 
+    public abstract function isValueEqualTo(BaseFieldValue $compare);
+
 }

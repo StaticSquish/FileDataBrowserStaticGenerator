@@ -7,6 +7,7 @@ use staticsquish\models\RootDataObject;
 use staticsquish\models\File;
 use staticsquish\models\FieldScalarValueText;
 use staticsquish\models\FieldScalarValueDateTime;
+use staticsquish\models\FieldScalarValueLatLng;
 use staticsquish\models\FieldListValue;
 
 /**
@@ -77,6 +78,9 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 		if ($fieldConfig && $fieldConfig->isDateTime) {
 			return new FieldScalarValueDateTime($data, $fieldConfig);
 		}
+        if ($fieldConfig && $fieldConfig->isLatLng) {
+            return new FieldScalarValueLatLng($data);
+        }
 
 		return new FieldScalarValueText($data);
 

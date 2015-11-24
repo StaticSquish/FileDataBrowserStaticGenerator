@@ -12,3 +12,8 @@ Jennifer The Duckling!
 [born]
 
 2015-05-13
+
+
+[lives]
+
+http://www.openstreetmap.org/#map=18/56.01895/-3.75526

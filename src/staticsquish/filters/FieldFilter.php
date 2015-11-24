@@ -42,8 +42,7 @@ class FieldFilter implements InterfaceFieldFilter {
     }
 
     protected function doesFieldValuePass(BaseFieldScalarValue $fieldValue) {
-      // TODO this should be a compareForFilter() function on class or something, so different types can do differently!
-      return ($fieldValue->getValue() == $this->fieldValue->getValue());
+        return $fieldValue->isValueEqualTo($this->fieldValue);
     }
 
     protected function doesFieldListValuePass(FieldListValue $fieldListValue) {
