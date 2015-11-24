@@ -17,6 +17,7 @@ use staticsquish\OutFolder;
 use staticsquish\themes\movefast\writecomponents\IndexWriteComponent;
 use staticsquish\themes\movefast\writecomponents\DataWriteComponent;
 use staticsquish\themes\movefast\writecomponents\FieldWriteComponent;
+use staticsquish\themes\movefast\writecomponents\RootObjectsWriteComponent;
 
 class MoveFastTheme extends BaseTheme
 {
@@ -31,12 +32,6 @@ class MoveFastTheme extends BaseTheme
 
   		$outFolder = new OutFolder($dir);
 
-  		// General Data
-  		$data = array(
-  			'config'=>$site->getConfig(),
-  			'allRootDataObjects'=>$site->getRootDataObjects(),
-  		);
-
   		// Index
       $wc = new IndexWriteComponent($this->app, $site, $outFolder, $twigHelper);
       $wc->write();
@@ -47,32 +42,10 @@ class MoveFastTheme extends BaseTheme
       $wc->write();
 
 
-  		// Root Objects
-  		mkdir($dir.DIRECTORY_SEPARATOR.'data');
-  		foreach($site->getRootDataObjects() as $rootDataObject) {
-  			$dataDir = $dir.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$rootDataObject->getSlug();
-        $fieldsWithNoValue = array();
-        foreach ($site->getConfig()->fields as $key=>$field) {
-          if (!$rootDataObject->hasField($key)) {
-            $fieldsWithNoValue[$key] = $field;
-          }
-        }
-  			// index
-  			$outFolder->addFileContents(
-  				'data'.DIRECTORY_SEPARATOR.$rootDataObject->getSlug(),
-  				'index.html',
-  				$twig->render('rootdataobject/index.html.twig', array_merge($data, array(
-  					'rootDataObject'=>$rootDataObject,
-            'fieldsWithNoValue'=>$fieldsWithNoValue,
-            'anyLatLngFields' => $site->getConfig()->isAnyLatLngFields(),
-  				)))
-  			);
-  			// files
-  			mkdir($dataDir.DIRECTORY_SEPARATOR.'files');
-  			foreach($rootDataObject->getFiles() as $file) {
-  				copy($file->getDir().DIRECTORY_SEPARATOR.$file->getName(), $dataDir.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$file->getName() );
-  			}
-  		}
+        // Root Objects
+        $wc = new RootObjectsWriteComponent($this->app, $site, $outFolder, $twigHelper);
+        $wc->write($dir);
+
 
       // field
       $wc = new FieldWriteComponent($this->app, $site, $outFolder, $twigHelper);
