@@ -39,18 +39,32 @@ class FieldWriteComponent extends BaseWriteTwigComponent
         );
       }
 
-      usort($values, 'staticsquish\themes\movefast\writecomponents\FieldWriteComponent::sortByValue');
-      $this->outFolder->addFileContents(
-        'field'.DIRECTORY_SEPARATOR.$key,
-        'index.html',
-        $this->twigHelper->getTwig()->render('field/index.html.twig', array_merge($this->baseViewParameters, array(
-          'fieldKey'=>$key,
-          'fieldConfig'=>$fieldConfig,
-          'values' => $values,
-          'rootDataWithNoValues' => (count($rootDataWithNoValues) > 0),
-          'rootDataWithNoValuesCount' => count($rootDataWithNoValues),
-        )))
-      );
+        if ($fieldConfig->isLatLng) {
+            $this->outFolder->addFileContents(
+                'field'.DIRECTORY_SEPARATOR.$key,
+                'index.html',
+                $this->twigHelper->getTwig()->render('field/index.latlng.html.twig', array_merge($this->baseViewParameters, array(
+                    'fieldKey'=>$key,
+                    'fieldConfig'=>$fieldConfig,
+                    'values' => $values,
+                    'rootDataWithNoValues' => (count($rootDataWithNoValues) > 0),
+                    'rootDataWithNoValuesCount' => count($rootDataWithNoValues),
+                )))
+            );
+        } else {
+            usort($values, 'staticsquish\themes\movefast\writecomponents\FieldWriteComponent::sortByValue');
+            $this->outFolder->addFileContents(
+                'field'.DIRECTORY_SEPARATOR.$key,
+                'index.html',
+                $this->twigHelper->getTwig()->render('field/index.html.twig', array_merge($this->baseViewParameters, array(
+                    'fieldKey'=>$key,
+                    'fieldConfig'=>$fieldConfig,
+                    'values' => $values,
+                    'rootDataWithNoValues' => (count($rootDataWithNoValues) > 0),
+                    'rootDataWithNoValuesCount' => count($rootDataWithNoValues),
+                )))
+            );
+        }
 
       usort($values, 'staticsquish\themes\movefast\writecomponents\FieldWriteComponent::sortByCount');
       $this->outFolder->addFileContents(
