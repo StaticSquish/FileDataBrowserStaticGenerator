@@ -17,4 +17,8 @@ class FieldConfig {
 
 	public $timezone = 'UTC';
 
+    public function isMoreThanOneType() {
+        return ($this->isDateTime && $this->isLatLng);
+    }
+
 }

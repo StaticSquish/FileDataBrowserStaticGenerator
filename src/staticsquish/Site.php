@@ -15,6 +15,7 @@ use staticsquish\themes\BaseTheme;
 use staticsquish\themes\movefast\MoveFastTheme;
 use staticsquish\errors\DataErrorTwoRootObjectsHaveSameSlug;
 use staticsquish\errors\ConfigErrorNotFound;
+use staticsquish\errors\ConfigErrorFieldHasMoreThanOneType;
 
 
 /**
@@ -52,7 +53,18 @@ class Site {
 
         if (!$anyConfigFound) {
             $this->errors[] = new ConfigErrorNotFound();
+        } else {
+            // check config
+
+            foreach($this->config->fields as $field) {
+                if ($field->isMoreThanOneType()) {
+                    $this->errors[] = new ConfigErrorFieldHasMoreThanOneType();
+                }
+            }
+
+
         }
+
 
 		$this->theme = new MoveFastTheme($this->app);
 
