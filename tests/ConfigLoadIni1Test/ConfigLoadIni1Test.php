@@ -67,8 +67,8 @@ class ConfigLoadIni1Test extends PHPUnit_Framework_TestCase {
         $site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteFieldTwoTypes');
 
         $this->assertEquals(1, count($site->getErrors()));
-        $error = array_pop($site->getErrors());
-
+        $errors = $site->getErrors();
+        $error = array_pop($errors);
         $this->assertEquals('staticsquish\errors\ConfigErrorFieldHasMoreThanOneType', get_class( $error ));
 
     }

@@ -54,13 +54,11 @@ class DataLoadDateTime1Test extends PHPUnit_Framework_TestCase {
         $site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteBadData1');
 
         $this->assertEquals(1, count($site->getWarnings()));
-        $warning = array_pop($site->getWarnings());
+        $warnings = $site->getWarnings();
+        $warning = array_pop($warnings);
         $this->assertEquals('staticsquish\warnings\DataWarningBadValue', get_class( $warning ));
 
         $this->assertEquals(0, count($site->getErrors()));
-
-
-
 
     }
 }
