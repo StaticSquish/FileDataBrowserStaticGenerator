@@ -25,6 +25,8 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 	{
 		$data = parse_ini_file($site->getDir().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$filename.DIRECTORY_SEPARATOR."data.ini", true);
 
+        \staticsquish\ArrayChangeKeyCaseRecursive::convert($data, CASE_LOWER);
+
 		$r = new RootDataObject();
 		$r->setSlug($filename);
 		$r->setTitle($filename);
