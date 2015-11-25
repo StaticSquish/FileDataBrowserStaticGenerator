@@ -14,6 +14,7 @@ use staticsquish\filters\FieldFilter;
 use staticsquish\themes\BaseTheme;
 use staticsquish\themes\movefast\MoveFastTheme;
 use staticsquish\errors\DataErrorTwoRootObjectsHaveSameSlug;
+use staticsquish\errors\ConfigErrorNotFound;
 
 
 /**
@@ -38,13 +39,20 @@ class Site {
 		$this->dir = $dir;
 		$this->config = new Config();
 
+        $anyConfigFound = false;
+
 		foreach(array(
 			New ConfigLoaderIni(),
 				) as $loader) {
 			if ($loader->isLoadableConfigInSite($this)) {
 				$loader->loadConfigInSite($this->config, $this);
+                $anyConfigFound = true;
 			}
 		}
+
+        if (!$anyConfigFound) {
+            $this->errors[] = new ConfigErrorNotFound();
+        }
 
 		$this->theme = new MoveFastTheme($this->app);
 
@@ -58,6 +66,10 @@ class Site {
 	protected $rootDataObjects = array();
 
 	function load() {
+
+        if ($this->isLoaded || $this->errors) {
+            return;
+        }
 
 		$loaders = array(
 			new RootDataLoaderIni(),
