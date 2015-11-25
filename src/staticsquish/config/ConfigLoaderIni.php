@@ -37,7 +37,7 @@ class ConfigLoaderIni extends BaseConfigLoader {
 
 		foreach ($data as $key=>$fieldOptions) {
 			if (substr($key, 0, 6) == 'field.') {
-				$fieldName = substr($key, 6);
+				$fieldName = strtolower(trim(substr($key, 6)));
 
 				$config->fields[$fieldName] = new FieldConfig();
 				$config->fields[$fieldName]->label = $fieldName;
