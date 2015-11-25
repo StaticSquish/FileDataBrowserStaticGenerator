@@ -2,7 +2,7 @@
 
 Bobby
 
-[tags]
+[TAGS]
 
 shiny
 fun

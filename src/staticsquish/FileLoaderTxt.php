@@ -29,7 +29,7 @@ class FileLoaderTxt {
         if ($infield) {
           $this->setValue($infield, $fieldData);
         }
-        $infield = trim(substr($trimmedLine, 1, -1));
+        $infield = strtolower(trim(substr($trimmedLine, 1, -1)));
         $fieldData = '';
       } else if ($infield) {
         $fieldData .= $trimmedLine."\n";
