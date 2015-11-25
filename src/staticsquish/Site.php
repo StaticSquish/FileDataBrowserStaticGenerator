@@ -94,9 +94,15 @@ class Site {
 				foreach($loaders as $loader) {
 					if ($loader->isLoadableDataInSite($this, $fileName)) {
 						$out = $loader->loadRootDataInSite($this, $fileName);
-						if (is_a($out, 'staticsquish\models\RootDataObject')) {
-							$this->addRootDataObject($out);
-						}
+                        foreach ($out->getRootDataObjects() as $rootDataObject) {
+                            $this->addRootDataObject($rootDataObject);
+                        }
+                        foreach($out->getErrors() as $error) {
+                            $this->errors[] = $error;
+                        }
+                        foreach($out->getWarnings() as $warning) {
+                            $this->warnings[] = $warning;
+                        }
 					}
 				}
 

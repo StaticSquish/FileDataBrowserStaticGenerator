@@ -9,6 +9,8 @@ use staticsquish\models\FieldScalarValueText;
 use staticsquish\models\FieldScalarValueDateTime;
 use staticsquish\models\FieldScalarValueLatLng;
 use staticsquish\models\FieldListValue;
+use staticsquish\BadValueException;
+use staticsquish\warnings\DataWarningBadValue;
 
 /**
  *  @license 3-clause BSD
@@ -26,6 +28,8 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 		$data = parse_ini_file($site->getDir().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$filename.DIRECTORY_SEPARATOR."data.ini", true);
 
         \staticsquish\ArrayChangeKeyCaseRecursive::convert($data, CASE_LOWER);
+
+        $out = new DataLoadResult();
 
 		$r = new RootDataObject();
 		$r->setSlug($filename);
@@ -45,21 +49,28 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 			foreach(array_keys($data['data']) as $k) {
 				if (!in_array($k, array('title','slug','description'))) {
 
-					$fieldConfig = isset($site->getConfig()->fields[$k]) ? $site->getConfig()->fields[$k] : null;
+                    try {
+                        $fieldConfig = isset($site->getConfig()->fields[$k]) ? $site->getConfig()->fields[$k] : null;
 
-					if ($fieldConfig && $fieldConfig->isList) {
+                        if ($fieldConfig && $fieldConfig->isList) {
 
-							$field = new FieldListValue;
-							foreach(explode(',', $data['data'][$k]) as $valueBit) {
-								$field->addValue($this->getFieldValue(trim($valueBit), $fieldConfig));
-							}
+                            $field = new FieldListValue;
+                            foreach(explode(',', $data['data'][$k]) as $valueBit) {
+                                $field->addValue($this->getFieldValue(trim($valueBit), $fieldConfig));
+                            }
 
-					} else {
-						// no config - just treat as string
-						$field = $this->getFieldValue($data['data'][$k], $fieldConfig);
-					}
+                        } else {
+                            // no config - just treat as string
+                            $field = $this->getFieldValue($data['data'][$k], $fieldConfig);
+                        }
 
-					$r->addField($k, $field);
+                        $r->addField($k, $field);
+
+                    } catch (BadValueException $e) {
+
+                        $out->addWarning(new DataWarningBadValue());
+
+                    }
 				}
 			}
 		}
@@ -72,7 +83,9 @@ class RootDataLoaderIni extends  BaseRootDataLoader {
 			}
 		}
 
-		return $r;
+        $out->addRootDataObject($r);
+
+        return $out;
 
 	}
 

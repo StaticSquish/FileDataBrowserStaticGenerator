@@ -4,6 +4,7 @@
 namespace staticsquish\models;
 
 use staticsquish\config\FieldConfig;
+use staticsquish\BadValueException;
 
 /**
  *  @license 3-clause BSD
@@ -53,8 +54,11 @@ class FieldScalarValueDateTime extends BaseFieldScalarValue  {
    */
   public function setValue($value)
   {
-      $this->value = new \DateTime( $value , new \DateTimeZone($this->timezone));
-
+      try {
+          $this->value = new \DateTime( $value , new \DateTimeZone($this->timezone));
+      } catch (\Exception $e) {
+          throw new BadValueException("DateTime could not parse ". $value);
+      }
       return $this;
   }
 

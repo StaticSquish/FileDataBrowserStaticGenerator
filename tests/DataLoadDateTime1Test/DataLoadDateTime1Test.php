@@ -47,4 +47,20 @@ class DataLoadDateTime1Test extends PHPUnit_Framework_TestCase {
         $this->assertEquals('2015-07-04T10:01:23+01:00', $fields['started']->getValueAsString() );
 
     }
+
+    function testBad1() {
+        global $app;
+
+        $site = new \staticsquish\Site($app, __DIR__.DIRECTORY_SEPARATOR.'siteBadData1');
+
+        $this->assertEquals(1, count($site->getWarnings()));
+        $warning = array_pop($site->getWarnings());
+        $this->assertEquals('staticsquish\warnings\DataWarningBadValue', get_class( $warning ));
+
+        $this->assertEquals(0, count($site->getErrors()));
+
+
+
+
+    }
 }

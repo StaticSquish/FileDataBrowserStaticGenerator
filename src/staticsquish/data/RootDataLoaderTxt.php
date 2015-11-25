@@ -10,6 +10,8 @@ use staticsquish\models\FieldScalarValueDateTime;
 use staticsquish\models\FieldScalarValueLatLng;
 use staticsquish\models\FieldListValue;
 use staticsquish\FileLoaderTxt;
+use staticsquish\BadValueException;
+use staticsquish\warnings\DataWarningBadValue;
 
 /**
 *  @license 3-clause BSD
@@ -26,6 +28,8 @@ class RootDataLoaderTxt extends  BaseRootDataLoader {
   {
 
     $fileLoader = new FileLoaderTxt($site->getDir().DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.$filename.DIRECTORY_SEPARATOR."data.txt", $site->getConfig()->fields);
+
+    $out = new DataLoadResult();
 
     $r = new RootDataObject();
     $r->setSlug($filename);
@@ -44,28 +48,36 @@ class RootDataLoaderTxt extends  BaseRootDataLoader {
     foreach($fileLoader->getKeys() as $k) {
       if (!in_array($k, array('title','slug','description'))) {
 
-        $fieldConfig = isset($site->getConfig()->fields[$k]) ? $site->getConfig()->fields[$k] : null;
+          try {
 
-        $field = null;
+              $fieldConfig = isset($site->getConfig()->fields[$k]) ? $site->getConfig()->fields[$k] : null;
 
-        if ($fieldConfig && $fieldConfig->isList) {
+              $field = null;
 
-          $field = new FieldListValue;
-          foreach($fileLoader->getAsList($k) as $valueBit) {
-            $field->addValue($this->getFieldValue(trim($valueBit), $fieldConfig));
+              if ($fieldConfig && $fieldConfig->isList) {
+
+                  $field = new FieldListValue;
+                  foreach($fileLoader->getAsList($k) as $valueBit) {
+                      $field->addValue($this->getFieldValue(trim($valueBit), $fieldConfig));
+                  }
+
+              } else {
+                  // no config - just treat as string
+                  $fieldPossible = $this->getFieldValue($fileLoader->getAsValue($k), $fieldConfig);
+                  if ($fieldPossible->hasValue()) {
+                      $field = $fieldPossible;
+                  }
+              }
+
+              if ($field) {
+                  $r->addField($k, $field);
+              }
+
+          } catch (BadValueException $e) {
+
+              $out->addWarning(new DataWarningBadValue());
+
           }
-
-        } else {
-          // no config - just treat as string
-          $fieldPossible = $this->getFieldValue($fileLoader->getAsValue($k), $fieldConfig);
-          if ($fieldPossible->hasValue()) {
-            $field = $fieldPossible;
-          }
-        }
-
-        if ($field) {
-          $r->addField($k, $field);
-        }
       }
     }
 
@@ -76,8 +88,10 @@ class RootDataLoaderTxt extends  BaseRootDataLoader {
         );
       }
     }
+    
+    $out->addRootDataObject($r);
 
-    return $r;
+    return $out;
 
   }
 
