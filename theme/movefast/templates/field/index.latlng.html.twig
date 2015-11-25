@@ -43,6 +43,11 @@
 
 {% block javascriptFooter %}
     <script>
+        var data = [];
+        {% for data in values %}
+            data.push({'lat':  {{ data.value.lat }}  , 'lng':  {{ data.value.lng}} ,  'url':   '{{ ('/field/' ~ fieldKey ~ '/value/' ~ data.value.valueKeyForWeb) | internalLinkToDir }}'  , 'count':  {{ data.count }}  });
+        {% endfor %}
+
         $( document ).ready(function() {
             var mapObject = L.map('map');
             var mapquestUrl = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
@@ -50,12 +55,18 @@
             mapquestAttrib = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, '+
             '<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors';
             L.tileLayer(mapquestUrl, {maxZoom: 18, attribution: mapquestAttrib, subdomains: subDomains}).addTo(mapObject);
-            {% for data in values %}
-                var html = 'Count {{ data.count }} - <a href="{{ ('/field/' ~ fieldKey ~ '/value/' ~ data.value.valueKeyForWeb) | internalLinkToDir }}">View</a>';
-                L.marker([{{ data.value.lat }}, {{ data.value.lng}}]).bindPopup(html).addTo(mapObject);
-                {# The next line is terrible hack. Really we should zoom to show all markers. TODO  #}
-                mapObject.setView([{{ data.value.lat }},{{ data.value.lng }}], 10);
-            {% endfor %}
+            var bounds;
+            for (index = 0; index < data.length; ++index) {
+                var html = 'Count ' +  data[index].count +' - <a href="' + data[index].url  + '">View</a>';
+                var latlng = L.latLng(data[index].lat, data[index].lng);
+                L.marker(latlng).bindPopup(html).addTo(mapObject);
+                if (bounds != null) {
+                    bounds.extend(latlng);
+                } else {
+                    bounds = L.latLngBounds([latlng]);
+                }
+            }
+            mapObject.fitBounds(bounds);
         });
     </script>
 {% endblock %}

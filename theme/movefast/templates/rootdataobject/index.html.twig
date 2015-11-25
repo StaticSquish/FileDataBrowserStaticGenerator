@@ -67,6 +67,11 @@
     {% endfor %}
     {% if latlngs %}
         <script>
+            var data = [];
+            {% for latlng in latlngs %}
+                data.push({'lat':  {{ latlng.lat }}  , 'lng':  {{ latlng.lng}}   });
+            {% endfor %}
+
             $( document ).ready(function() {
                 $('#map').show();
                 var mapObject = L.map('map');
@@ -75,11 +80,17 @@
 			        mapquestAttrib = 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>, '+
 					               '<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors';
 	            L.tileLayer(mapquestUrl, {maxZoom: 18, attribution: mapquestAttrib, subdomains: subDomains}).addTo(mapObject);
-                {% for latlng in latlngs %}
-                    L.marker([{{ latlng.lat }}, {{ latlng.lng}}]).addTo(mapObject);
-                    {# The next line is terrible hack. Really we should zoom to show all markers. TODO  #}
-                    mapObject.setView([{{ latlng.lat }},{{ latlng.lng}}], 10);
-                {% endfor %}
+                var bounds;
+                for (index = 0; index < data.length; ++index) {
+                    var latlng = L.latLng(data[index].lat, data[index].lng);
+                    L.marker(latlng).addTo(mapObject);
+                    if (bounds != null) {
+                        bounds.extend(latlng);
+                    } else {
+                        bounds = L.latLngBounds([latlng]);
+                    }
+                }
+                mapObject.fitBounds(bounds);
             });
         </script>
     {% endif %}
